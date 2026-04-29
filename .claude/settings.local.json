@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.kysondana.com)",
+      "WebFetch(domain:aleksitappura.com)",
+      "Bash(npm --version)",
+      "Bash(npx *)",
+      "Bash(mkdir -p ../_tmp_backup)",
+      "Bash(mv CLAUDE.md case-studies .gitignore.bak ../_tmp_backup/)"
+    ]
+  }
+}
