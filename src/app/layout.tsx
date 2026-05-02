@@ -15,9 +15,34 @@ const notoSansTC = Noto_Sans_TC({
   preload: false,
 });
 
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "http://localhost:3000";
+
+const siteName = "Alvin · 獨立工程師作品集";
+const siteDescription =
+  "獨立工程師 Alvin 的作品集 — 專注 LINE 生態系一條龍、語音 AI 應用、全端互動工具。";
+
 export const metadata: Metadata = {
-  title: "作品集（Portfolio）",
-  description: "LINE 生態系與 AI 應用作品集 — 個人作品與接案紀錄",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteName,
+    template: "%s · Alvin",
+  },
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    locale: "zh_TW",
+    siteName,
+    title: siteName,
+    description: siteDescription,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description: siteDescription,
+  },
 };
 
 export default function RootLayout({
