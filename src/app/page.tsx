@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 type CaseItem = {
   slug: string;
@@ -7,17 +8,19 @@ type CaseItem = {
   stack: string;
   type: string;
   featured?: boolean;
+  thumbnail?: string;
 };
 
 const cases: CaseItem[] = [
   {
     slug: "nail-art-reservation",
-    name: "LINE 美甲預約系統",
+    name: "LINE 一條龍預約系統",
     tagline:
-      "客人在 LINE 裡完成所有預約流程——加好友、選服務、收提醒，全程不用切換 App。",
+      "建置 LINE 官方帳號 + 預約網頁，讓客人在 LINE 裡完成所有預約流程——加好友、選服務、收提醒，全程不用切換 App。",
     stack: "LINE Bot · LIFF · Cloudflare Worker · Google Apps Script",
     type: "",
     featured: true,
+    thumbnail: "/cases/nail-art-reservation/cover.png",
   },
   {
     slug: "voxplan",
@@ -47,13 +50,13 @@ export default function Home() {
             Portfolio
           </p>
           <h1 className="mt-5 text-4xl font-semibold leading-[1.2] tracking-tight md:text-5xl md:leading-[1.15]">
-            把 LINE 變成一條
+            用程式碼
             <br className="hidden md:block" />
-            完整的服務動線。
+            讓世界更便利
           </h1>
           <p className="mt-6 max-w-xl text-lg text-zinc-600 md:text-xl dark:text-zinc-400">
-            獨立工程師，專注 LINE 生態系與 AI 應用。
-            從接小型店家的預約系統到自己上架語音行事曆 APP，從前端、後端到部署都是由自己開發。
+            我是 Alvin ，是一名獨立工程師，善於 LINE 生態系、網頁製作與 AI 應用，並且致力於打造最便利的客製化服務流程。<br />
+            從接小型店家的預約系統到自己上架語音行事曆 APP，前端、後端到部署都是由自己開發、實行。
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-zinc-500">
             <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" aria-hidden />
@@ -62,14 +65,16 @@ export default function Home() {
             <span>台灣・繁體中文 / English</span>
           </div>
         </div>
-        {/* 露臉照片占位：替換成真實照片時，建議使用 next/image 與圓形剪裁 */}
-        <div
-          aria-label="個人照片占位"
-          className="aspect-square w-40 self-start overflow-hidden rounded-full bg-gradient-to-br from-zinc-200 to-zinc-300 md:w-[220px] md:self-center dark:from-zinc-800 dark:to-zinc-900"
-        >
-          <div className="flex h-full w-full items-center justify-center text-xs text-zinc-500">
-            照片占位
-          </div>
+        {/* 個人照片 */}
+        <div className="relative aspect-square w-40 self-start overflow-hidden rounded-full md:w-[220px] md:self-center">
+          <Image
+            src="/me.png"
+            alt="Alvin"
+            fill
+            sizes="(min-width: 768px) 220px, 160px"
+            className="object-cover"
+            priority
+          />
         </div>
       </section>
 
@@ -93,17 +98,29 @@ export default function Home() {
                 c.featured ? "md:col-span-2" : "",
               ].join(" ")}
             >
-              {/* 案例縮圖占位 */}
+              {/* 案例縮圖 */}
               <div
                 className={[
-                  "mb-6 w-full overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-900",
+                  "relative mb-6 w-full overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-900",
                   c.featured ? "aspect-[16/7]" : "aspect-[16/9]",
                 ].join(" ")}
-                aria-hidden
               >
-                <div className="flex h-full w-full items-center justify-center text-xs text-zinc-400">
-                  {c.name} 縮圖占位
-                </div>
+                {c.thumbnail ? (
+                  <Image
+                    src={c.thumbnail}
+                    alt={c.name}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div
+                    className="flex h-full w-full items-center justify-center text-xs text-zinc-400"
+                    aria-hidden
+                  >
+                    {c.name} 縮圖占位
+                  </div>
+                )}
               </div>
               <div>
                 <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
