@@ -172,9 +172,7 @@ export default async function WorkDetail({
           <div className="mt-8 space-y-10">
               {c.solution && (
                 <div>
-                  <h3 className="text-base font-semibold tracking-tight">
-                    解法概述
-                  </h3>
+                  
                   <p className="mt-3 leading-relaxed text-zinc-700 dark:text-zinc-300">
                     {c.solution.text}
                   </p>

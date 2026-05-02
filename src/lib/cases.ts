@@ -128,10 +128,7 @@ export const cases: Case[] = [
         title: "三層 fallback 應對網路與 CORS",
         body: "請求順序：POST text/plain → JSONP <script> 注入 → localStorage 本地模式。對「店裡客人手機網路差」的真實情境很實用。",
       },
-      {
-        title: "為「美甲店規模」量身選型，不過度設計",
-        body: "月預約量 ≤ 300 筆 → Calendar 直接 maxResults: 2500 一次拿完，不做分頁。設計決策有寫進文件，不是偷懶。",
-      },
+      
     ],
   },
   {

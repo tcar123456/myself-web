@@ -28,7 +28,7 @@ const cases: CaseItem[] = [
     tagline:
       "用講的就能建立行程。「明天下午兩點在咖啡廳跟 Amy 開會」自動拆成標題、時間、地點、人員。",
     stack: "Flutter · Firebase · FastAPI · Whisper / GPT-4o-mini",
-    type: "個人 SaaS · iOS / Android 上架審核中",
+    type: "個人 SaaS · iOS / Android ",
   },
   {
     slug: "freedunk-hub",
@@ -36,7 +36,7 @@ const cases: CaseItem[] = [
     tagline:
       "為《Freedunk》玩家做的戰術分析工具——拖曳球員、Canvas 畫戰術線、一步步推演。",
     stack: "React · Canvas 2D API · 純前端單檔",
-    type: "個人作品",
+    type: "",
   },
 ];
 
@@ -72,7 +72,7 @@ export default function Home() {
             alt="Alvin"
             fill
             sizes="(min-width: 768px) 220px, 160px"
-            className="object-cover"
+            className="scale-110 object-cover object-[center_30%]"
             priority
           />
         </div>
@@ -82,7 +82,7 @@ export default function Home() {
       <section className="mt-24 md:mt-32">
         <div className="flex items-end justify-between gap-4">
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            主打作品  
+            服務內容  
           </h2>
           
         </div>
@@ -156,8 +156,7 @@ export default function Home() {
             主要做 LINE 生態系、AI 應用、全端網站這三塊；從需求釐清、寫 code 到部署上線。
             <br />
             <br />
-            如果你正在找一個能從零做到上線、過程中持續溝通的工程師，歡迎來信或加 LINE 聊聊，
-            我會直接告訴你能不能做、怎麼做。
+            如果你正在找一個能從零做到上線、過程中持續溝通的工程師，歡迎來信或加 LINE 聊聊。
           </p>
           <ul className="space-y-5 text-zinc-700 dark:text-zinc-300">
             <li>
@@ -195,10 +194,9 @@ export default function Home() {
             想評估你的 LINE 預約系統 / AI 應用 / 全端網站？
           </h2>
           <p className="mt-4 max-w-2xl text-zinc-600 dark:text-zinc-400">
-            加 LINE 或寄 Email 都可以。先聊聊你的需求，
-            我會直接告訴你「能不能做、預估時間、大概的費用區間」，討論完成後馬上開始你的專屬專案。
+            加 LINE 或寄 Email 都可以。先聊聊你的需求，評估「能不能做、預估時間、大概的費用區間」後，討論完成後馬上開始你的專屬專案。
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-col items-start gap-3">
             <a
               href="https://line.me/R/ti/p/%40989evvhq"
               target="_blank"
@@ -209,9 +207,9 @@ export default function Home() {
             </a>
             <a
               href="mailto:enghuang100@gmail.com"
-              className="inline-flex items-center justify-center rounded-full border border-zinc-300 px-6 py-3 text-sm font-medium transition hover:border-zinc-900 dark:border-zinc-700 dark:hover:border-zinc-50"
+              className="text-sm text-zinc-600 underline-offset-4 transition hover:text-zinc-900 hover:underline dark:text-zinc-400 dark:hover:text-zinc-50"
             >
-              Email
+              enghuang100@gmail.com
             </a>
           </div>
         </div>
