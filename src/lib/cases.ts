@@ -226,81 +226,73 @@ OpenAI / Groq APIs`,
     name: "Freedunk Hub",
     type: "個人作品 · 純前端互動工具",
     outcome:
-      "為《Freedunk》遊戲玩家設計的戰術分析工具——可拖曳球員、用 Canvas 畫戰術線、一步步推演進攻流程。",
+      "為《Freedunk》遊戲玩家設計的戰術分析工具，整合「選角模擬 → 樹狀推演 → 戰術繪製 → 陣容配置」四個分頁，內建 29 名遊戲角色與 18 項能力值資料，用同一套介面從選人到擺戰術一氣呵成。",
     role: "獨立完成",
-    duration: "2 天",
+    duration: "7 天",
     problem:
-      "個人 / 朋友群打《Freedunk》時想跟隊友溝通戰術，發現市面上的籃球戰術板都是泛用版，沒有遊戲內角色資料、能力值、位置配色等細節，討論起來很抽象。於是自己做一個。",
+      "方便《Freedunk》玩家在比賽時需要戰術討論的需求，所以做了一個專為這款遊戲打造的工具。",
     features: [
       {
-        title: "29 名遊戲角色 + 18 項能力值",
+        title: "選角模擬器：左右隊輪流 BAN/PICK 9 步驟",
         problem:
-          "泛用戰術板用代號（PG1 / SG2）讓人對不上是誰。Freedunk Hub 直接內建 29 名遊戲角色，分五個位置選擇，附上 18 項能力值資料（跑動、彈跳、三分、內防…），討論時直接用角色名。",
-        image: "",
+          "MOBA 風格的選角流程（左右隊各 BAN 1 角，再交錯 PICK 各 3 角），讓玩家在比賽前先模擬對手 BAN/PICK。每一步都有獨立的 undo/redo，可任意回退試不同 PICK，整輪結束後可一鍵重置。",
+        image: "/cases/freedunk-hub/draft-simulator.jpg",
       },
       {
-        title: "Canvas 戰術繪圖",
+        title: "選角樹狀圖：多分支推演",
         problem:
-          "純文字 / 口頭很難說明跑位路線。直接在戰術版上用畫筆畫線、可選顏色與粗細，把每個角色的移動路徑畫出來。",
-        image: "",
+          "透過樹狀圖更直觀的了解選角狀況。樹狀圖的每個節點都能新增分支，同時並排檢視多種 PICK 走向。並且可以儲存不同方案，命名、切換、刪除，全部存在 localStorage，下次開啟還在。",
+        image: "/cases/freedunk-hub/draft-tree.jpg",
       },
       {
-        title: "球員拖曳調整位置",
+        title: "籃球戰術版：球員拖曳 + Canvas 畫戰術線",
         problem:
-          "靜態圖無法動態擺位。直接拖曳球員 token 到場上任意位置，即時更新座標，模擬真實跑位。",
-        image: "",
+          "選完角後要實際擺位、討論跑位。從右側面板拖曳球員 token 到球場任意位置，再用 4 色畫筆（黃 / 紅 / 藍 / 綠）畫出移動路徑與傳球線，畫筆粗細可調。戰術版底圖是真實籃球場圖片，搭配格線方便對位。",
+        image: "/cases/freedunk-hub/tactics-board.jpg",
       },
       {
-        title: "戰術步驟分解",
+        title: "球員配置板：自由配置 + 畫筆模式 + 能力值彈窗",
         problem:
-          "複雜戰術需要分階段呈現。一個戰術可分多個步驟，每步有獨立的球員位置 + Canvas 畫面快照，逐步推演進攻流程。",
-        image: "",
-      },
-      {
-        title: "Undo / Redo（含 Canvas 狀態）",
-        problem:
-          "操作錯了不能還原會打斷思路。完整歷史快照同時管理 React state（球員位置）+ Canvas pixel 狀態（畫線），支援 Ctrl+Z / Ctrl+Y。",
-        image: "",
-      },
-      {
-        title: "觸控支援",
-        problem:
-          "球場邊就要快速畫戰術，桌機不在場。手機 / 平板的拖曳與繪圖都能用，touch event 與 mouse event 統一處理。",
-        image: "",
+          "自由使用的白板可以任意討論，輕點任一張卡片會跳出該球員 18 項能力值的彈窗（跑動、彈跳、三分、內防…），不用切到別頁查資料。配置與筆跡也都自動存到 localStorage。",
+        image: "/cases/freedunk-hub/roster-board.jpg",
       },
     ],
     solution: {
-      text: "單頁互動 Web App。React 18（CDN）+ Babel Standalone 在瀏覽器內 JSX 編譯，零部署成本。Canvas 2D API 自製 drawing / snapshot / restore 邏輯。狀態管理只用 React useState + useRef，無外部狀態庫。",
+      text: "單頁互動 Web App，1755 行寫在一個 index.html 內。React 18（CDN）+ Babel Standalone 在瀏覽器內即時編譯 JSX，無 build pipeline。四個分頁共用一份角色資料（CHARACTERS_DATA / STATS_DATA / SEQUENCE），各自獨立的 useState + useRef + localStorage，沒有共享 store。Canvas 2D 自製繪圖 / snapshot / restore，DOM 元素拖曳則手寫 mouse/touch event 統一處理。",
     },
     stack: [
       {
         layer: "UI",
-        tech: "React 18（CDN），Babel Standalone（瀏覽器內 JSX 編譯）",
+        tech: "React 18（CDN）+ Babel Standalone（瀏覽器內 JSX 即時編譯，無 build）",
       },
-      { layer: "樣式", tech: "Tailwind（CDN）、Google Fonts（Inter）" },
+      { layer: "樣式", tech: "Tailwind（CDN）" },
       {
         layer: "繪圖",
-        tech: "Canvas 2D API（自製 drawing / snapshot / restore 邏輯）",
+        tech: "Canvas 2D API（自製 drawing / snapshot / restore，dataURL 還原）",
       },
-      { layer: "狀態", tech: "React useState + useRef（無外部狀態庫）" },
+      {
+        layer: "狀態",
+        tech: "React useState + useRef，無外部狀態庫；持久化用 localStorage（rosterboard-tokens-v2、drafttree-data）",
+      },
     ],
     decisions: [
       {
-        title: "Undo / Redo 同時管理「DOM 狀態」與「Canvas pixel 狀態」",
-        body: "一般 undo/redo 只處理 React state，但戰術版的塗鴉直接畫在 canvas 上、不在 React 樹裡。每次操作把 { items, snap: canvas.toDataURL() } 推進歷史堆疊；undo 時還原 items state + 把 dataURL 重新畫回 canvas。",
+        title: "Undo / Redo 同時管理「React state」與「Canvas pixel 狀態」",
+        body: "一般 undo/redo 只處理 React state，但戰術版的塗鴉直接畫在 canvas 上、不在 React 樹裡。每次操作把 { items, snap: canvas.toDataURL() } 推進歷史堆疊；undo 時還原 state + 把 dataURL 重新 drawImage 回 canvas。戰術版、球員配置板各維護一套，互不干擾。",
+      },
+      {
+        title: "選角樹狀資料用遞迴函式管理，不攤平成 array",
+        body: "節點關係天然巢狀，硬攤平成 flat array 加 parentId 反而要每次手動 reconstruct。直接寫 updateNodeInTree / addChildInTree / removeNodeInTree / findPathInTree 四個遞迴函式，每次操作回傳新的根節點 immutable update，省下序列化／反序列化邏輯。",
       },
       {
         title: "拖曳判定區分「點擊」與「拖曳」",
-        body: "拖曳時若移動距離 ≤ 3px 視為點擊（不觸發拖曳邏輯，改開 popup），避免使用者輕觸時誤觸發拖曳。",
+        body: "拖曳時若移動距離 ≤ 3px 視為點擊（改開能力值彈窗，不觸發拖曳邏輯），避免使用者輕觸時誤觸發拖曳。",
       },
       {
         title: "觸控與滑鼠統一處理",
-        body: "用 e.clientX || (e.touches && e.touches[0].clientX) 模式統一兩種輸入裝置，不寫兩套邏輯。",
+        body: "用 e.clientX ?? e.touches?.[0].clientX 模式統一兩種輸入裝置，不寫兩套邏輯。手機 / 平板上拖曳與繪圖都能用。",
       },
-      {
-        title: "1755 行單檔的取捨（誠實版）",
-        body: "選 CDN React + 單檔的取捨是「快速迭代、零部署成本、檔案體積換來建置簡單」。優點：開新分頁就能改、不用 npm install。缺點：沒 tree-shaking、Babel Standalone 在客戶端執行、無 TypeScript、難拆元件。重做的話會用 Vite + React 拆檔。",
-      },
+      
     ],
   },
 ];

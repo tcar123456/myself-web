@@ -215,7 +215,7 @@ export default async function WorkDetail({
               {c.decisions.length > 0 && (
                 <div>
                   <h3 className="text-base font-semibold tracking-tight">
-                    架構決策亮點
+                    架構決策
                   </h3>
                   <ul className="mt-4 space-y-5">
                     {c.decisions.map((d, i) => (
