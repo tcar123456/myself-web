@@ -55,8 +55,8 @@ export default function Home() {
             讓世界更便利
           </h1>
           <p className="mt-6 max-w-xl text-lg text-zinc-600 md:text-xl dark:text-zinc-400">
-            我是 Alvin ，是一名獨立工程師，善於 LINE 生態系、網頁製作與 AI 應用，並且致力於打造最便利的客製化服務流程。<br />
-            從接小型店家的預約系統到自己上架語音行事曆 APP，前端、後端到部署都是由自己開發、實行。
+            我是 Alvin ，是一名獨立工程師，善於 LINE 生態系、網頁製作與 AI 應用，致力於替每位客戶客製化最適合的產品。<br />
+            從接小型店家的預約系統到自己上架語音行事曆 APP，前端、後端到部署都是由自己開發、上架。
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-zinc-500">
             <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" aria-hidden />
@@ -156,7 +156,7 @@ export default function Home() {
             主要做 LINE 生態系、AI 應用、全端網站這三塊；從需求釐清、寫 code 到部署上線。
             <br />
             <br />
-            如果你正在找一個能從零做到上線、過程中持續溝通的工程師，歡迎來信或加 LINE 聊聊。
+            如果你正在找一個能從零做到上線、過程中持續溝通的工程師，歡迎來信或私訊 LINE 官方帳號聊聊喔。
           </p>
           <ul className="space-y-5 text-zinc-700 dark:text-zinc-300">
             <li>
@@ -191,10 +191,10 @@ export default function Home() {
       <section className="mt-24 md:mt-32">
         <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-8 md:p-12 dark:border-zinc-800 dark:bg-zinc-900/50">
           <h2 className="max-w-2xl text-2xl font-semibold leading-snug tracking-tight md:text-3xl">
-            想評估你的 LINE 預約系統 / AI 應用 / 全端網站？
+            想製作你的 LINE 預約系統 / AI 應用 / 全端網站？
           </h2>
           <p className="mt-4 max-w-2xl text-zinc-600 dark:text-zinc-400">
-            加 LINE 或寄 Email 都可以。先聊聊你的需求，評估「能不能做、預估時間、大概的費用區間」後，討論完成後馬上開始你的專屬專案。
+            私訊 LINE 官方帳號或透過 Email 聊聊你的想法，評估「能不能做、預估時間、費用」，討論完成後馬上開始你的專屬專案。
           </p>
           <div className="mt-8 flex flex-col items-start gap-3">
             <a
