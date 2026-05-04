@@ -4,18 +4,38 @@ export const alt = "Alvin · 獨立工程師作品集";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+async function fetchWithRetry(
+  url: string,
+  { attempts = 3, timeoutMs = 8000 }: { attempts?: number; timeoutMs?: number } = {}
+): Promise<Response> {
+  let lastErr: unknown;
+  for (let i = 0; i < attempts; i++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const res = await fetch(url, { signal: controller.signal });
+      clearTimeout(timer);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res;
+    } catch (err) {
+      clearTimeout(timer);
+      lastErr = err;
+      if (i < attempts - 1) await new Promise((r) => setTimeout(r, 500 * (i + 1)));
+    }
+  }
+  throw lastErr instanceof Error ? lastErr : new Error(String(lastErr));
+}
+
 async function loadGoogleFont(family: string, text: string, weight: number) {
   const url = `https://fonts.googleapis.com/css2?family=${family}:wght@${weight}&text=${encodeURIComponent(
     text
   )}&display=swap`;
-  const css = await (await fetch(url)).text();
+  const css = await (await fetchWithRetry(url)).text();
   const resource = css.match(
     /src: url\((.+?)\) format\('(?:opentype|truetype|woff2?)'\)/
   );
   if (!resource) throw new Error(`Cannot load font: ${family}`);
-  const fontRes = await fetch(resource[1]);
-  if (!fontRes.ok) throw new Error(`Font fetch failed: ${fontRes.status}`);
-  return fontRes.arrayBuffer();
+  return (await fetchWithRetry(resource[1])).arrayBuffer();
 }
 
 export default async function OpengraphImage() {
