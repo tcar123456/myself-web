@@ -20,7 +20,7 @@ const cases: CaseItem[] = [
     stack: "LINE Bot · LIFF · Cloudflare Worker · Google Apps Script",
     type: "",
     featured: true,
-    thumbnail: "/cases/nail-art-reservation/cover.png",
+    thumbnail: "/cases/nail-art-reservation/cover.jpg",
   },
   {
     slug: "voxplan",
@@ -37,6 +37,7 @@ const cases: CaseItem[] = [
       "為《Freedunk》玩家做的戰術分析工具——拖曳球員、Canvas 畫戰術線、一步步推演。",
     stack: "React · Canvas 2D API · 純前端單檔",
     type: "",
+    thumbnail: "/cases/freedunk-hub/cover.jpg",
   },
 ];
 
@@ -99,12 +100,7 @@ export default function Home() {
               ].join(" ")}
             >
               {/* 案例縮圖 */}
-              <div
-                className={[
-                  "relative mb-6 w-full overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-900",
-                  c.featured ? "aspect-[16/7]" : "aspect-[16/9]",
-                ].join(" ")}
-              >
+              <div className="relative mb-6 aspect-[16/9] w-full overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-900">
                 {c.thumbnail ? (
                   <Image
                     src={c.thumbnail}
