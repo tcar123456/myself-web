@@ -29,6 +29,7 @@ const cases: CaseItem[] = [
       "用講的就能建立行程。「明天下午兩點在咖啡廳跟 Amy 開會」自動拆成標題、時間、地點、人員。",
     stack: "Flutter · Firebase · FastAPI · Whisper / GPT-4o-mini",
     type: "個人 SaaS · iOS / Android ",
+    thumbnail: "/cases/voxplan/cover.jpg",
   },
   {
     slug: "freedunk-hub",
@@ -187,12 +188,12 @@ export default function Home() {
       <section className="mt-24 md:mt-32">
         <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-8 md:p-12 dark:border-zinc-800 dark:bg-zinc-900/50">
           <h2 className="max-w-2xl text-2xl font-semibold leading-snug tracking-tight md:text-3xl">
-            想製作你的 LINE 預約系統 / AI 應用 / 全端網站？
+            聯絡 Alvin ，討論你的想法，並馬上開始你的專案
           </h2>
           <p className="mt-4 max-w-2xl text-zinc-600 dark:text-zinc-400">
-            私訊 LINE 官方帳號或透過 Email 聊聊你的想法，評估「能不能做、預估時間、費用」，討論完成後馬上開始你的專屬專案。
+            私訊 LINE 官方帳號或寄 Email 聊聊你的想法，評估「能不能做、預估時間、費用」，討論完成後馬上開始屬於你的專案。
           </p>
-          <div className="mt-8 flex flex-col items-start gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href="https://line.me/R/ti/p/%40989evvhq"
               target="_blank"
@@ -203,9 +204,9 @@ export default function Home() {
             </a>
             <a
               href="mailto:enghuang100@gmail.com"
-              className="text-sm text-zinc-600 underline-offset-4 transition hover:text-zinc-900 hover:underline dark:text-zinc-400 dark:hover:text-zinc-50"
+              className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
             >
-              enghuang100@gmail.com
+              Email
             </a>
           </div>
         </div>
@@ -213,7 +214,32 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="mt-24 border-t border-zinc-200 pt-8 text-sm text-zinc-500 md:mt-32 dark:border-zinc-800">
-        <p>© 2026 · Built with Next.js + Tailwind</p>
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <p>© 2026 · Built with Next.js + Tailwind</p>
+          <div className="flex flex-col items-start gap-2 md:items-end">
+            <span className="text-zinc-400 dark:text-zinc-600">聯絡方式</span>
+            <p>
+              LINE ID:{" "}
+              <a
+                href="https://line.me/R/ti/p/%40989evvhq"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline-offset-4 transition hover:text-zinc-900 hover:underline dark:hover:text-zinc-50"
+              >
+                @989evvhq
+              </a>
+            </p>
+            <p>
+              Email:{" "}
+              <a
+                href="mailto:enghuang100@gmail.com"
+                className="underline-offset-4 transition hover:text-zinc-900 hover:underline dark:hover:text-zinc-50"
+              >
+                enghuang100@gmail.com
+              </a>
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );
