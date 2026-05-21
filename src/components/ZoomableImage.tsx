@@ -181,8 +181,8 @@ export default function ZoomableImage({
           {/* 圖片容器 */}
           <div
             style={{
-              width: `${scale * 100}vw`,
-              height: `${scale * 100}vh`,
+              width: `${scale * 180}vw`,
+              height: `${scale * 180}vh`,
             }}
             className="pointer-events-none flex items-center justify-center transition-[width,height] duration-100"
           >
