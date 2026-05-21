@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { cases, getCase, getNextCase } from "@/lib/cases";
+import ZoomableImage from "@/components/ZoomableImage";
 
 type Params = { slug: string };
 
@@ -112,25 +112,35 @@ export default async function WorkDetail({
             <div key={i}>
               {/* 截圖 */}
               {f.images && f.images.length > 0 ? (
-                <div className="-mx-6 flex gap-3 overflow-x-auto px-6 pb-2 sm:mx-0 sm:gap-4 sm:px-0">
-                  {f.images.map((img, j) => (
-                    <div
-                      key={j}
-                      className="relative aspect-[9/19] w-[180px] flex-shrink-0 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 sm:w-[200px]"
-                    >
-                      <Image
-                        src={img}
-                        alt={`${f.title} - 步驟 ${j + 1}`}
-                        fill
-                        sizes="200px"
-                        className="object-contain"
-                      />
+                (() => {
+                  const galleryItems = f.images.map((src, k) => ({
+                    src,
+                    alt: `${f.title} - 步驟 ${k + 1}`,
+                  }));
+                  return (
+                    <div className="-mx-6 flex gap-3 overflow-x-auto px-6 pb-2 sm:mx-0 sm:gap-4 sm:px-0">
+                      {f.images.map((img, j) => (
+                        <div
+                          key={j}
+                          className="relative aspect-[9/19] w-[180px] flex-shrink-0 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 sm:w-[200px]"
+                        >
+                          <ZoomableImage
+                            src={img}
+                            alt={`${f.title} - 步驟 ${j + 1}`}
+                            fill
+                            sizes="200px"
+                            className="object-contain"
+                            gallery={galleryItems}
+                            galleryIndex={j}
+                          />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  );
+                })()
               ) : f.image ? (
                 <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
-                  <Image
+                  <ZoomableImage
                     src={f.image}
                     alt={f.title}
                     width={1600}
