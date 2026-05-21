@@ -23,6 +23,16 @@ const cases: CaseItem[] = [
     thumbnail: "/cases/nail-art-reservation/cover.jpg",
   },
   {
+    slug: "my-coffee-site",
+    name: "暮焙 MUBEI 咖啡豆電商 Demo",
+    tagline:
+      "咖啡豆網路商店 Demo。顧客端從逛單品、加購物車、結帳付款到看會員等級；店家端從接單、改狀態、調庫存、發優惠碼到印出貨單。",
+    stack: "Next.js 16 · Tailwind 4 · Prisma 7 · Supabase · Auth.js v5 · ECPay / LINE Pay",
+    type: "個人作品 · 全端電商 Demo",
+    featured: true,
+    thumbnail: "/cases/my-coffee-site/cover.jpg",
+  },
+  {
     slug: "voxplan",
     name: "VoxPlan 語音行事曆",
     tagline:
@@ -149,8 +159,8 @@ export default function Home() {
         </h2>
         <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
           <p className="text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-            從美甲店的 LINE 預約系統開始接案，後來也自己做了一款語音行事曆 APP 上架。
-            主要做 LINE 生態系、AI 應用、全端網站這三塊；從需求釐清、寫 code 到部署上線。
+            從 LINE 一條龍系統開始接案，後來也自己做了一款語音行事曆 APP 上架。
+            主要做 LINE 生態系、AI 應用、中小型全端網站這三塊；從需求釐清、寫 code 到部署上線。
             <br />
             <br />
             如果你正在找一個能從零做到上線、過程中持續溝通的工程師，歡迎來信或私訊 LINE 官方帳號聊聊喔。
@@ -177,7 +187,7 @@ export default function Home() {
                 全端網站與 SaaS
               </p>
               <p className="mt-1 text-sm text-zinc-500">
-                Next.js · Flutter · Firebase · Cloudflare · Zeabur · GAS
+                Next.js · Flutter · Firebase · Cloudflare · Zeabur · GAS · Supabase
               </p>
             </li>
           </ul>
@@ -188,7 +198,7 @@ export default function Home() {
       <section className="mt-24 md:mt-32">
         <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-8 md:p-12 dark:border-zinc-800 dark:bg-zinc-900/50">
           <h2 className="max-w-2xl text-2xl font-semibold leading-snug tracking-tight md:text-3xl">
-            聯絡 Alvin ，討論你的想法，並馬上開始你的專案
+            聯絡 Alvin 討論你的想法，開始你專屬的專案
           </h2>
           <p className="mt-4 max-w-2xl text-zinc-600 dark:text-zinc-400">
             私訊 LINE 官方帳號或寄 Email 聊聊你的想法，評估「能不能做、預估時間、費用」，討論完成後馬上開始屬於你的專案。

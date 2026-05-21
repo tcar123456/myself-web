@@ -91,14 +91,16 @@ export default async function WorkDetail({
       </header>
 
       {/* 解決了什麼問題 */}
-      <section className="mt-16">
-        <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
-          解決問題
-        </h2>
-        <p className="mt-4 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-          {c.problem}
-        </p>
-      </section>
+      {c.problem && (
+        <section className="mt-16">
+          <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
+            解決問題
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
+            {c.problem}
+          </p>
+        </section>
+      )}
 
       {/* 主要功能（核心區） */}
       <section className="mt-16 md:mt-20">

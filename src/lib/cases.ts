@@ -24,7 +24,7 @@ export type Case = {
   role: string;
   duration: string;
   websiteUrl?: string;
-  problem: string;
+  problem?: string;
   features: Feature[];
   solution?: {
     text: string;
@@ -129,6 +129,101 @@ export const cases: Case[] = [
         body: "請求順序：POST text/plain → JSONP <script> 注入 → localStorage 本地模式。對「店裡客人手機網路差」的真實情境很實用。",
       },
       
+    ],
+  },
+  {
+    slug: "my-coffee-site",
+    name: "暮焙 MUBEI 咖啡豆電商 Demo",
+    type: "個人作品 · 全端電商 Demo",
+    outcome:
+      "完整的咖啡豆網路商店 Demo。顧客：從首頁、單品咖啡、購物車、結帳、4 種付款方式，到會員中心看訂單跟訂閱配送；店家：從接單、改訂單狀態、調庫存、發優惠碼、看每天賺多少，到印出貨單和叫物流。",
+    role: "前端、後端、資料庫、金物流串接、部署",
+    duration: "3~4週內",
+    websiteUrl: "https://my-coffee-site-demo.vercel.app/",
+    features: [
+      {
+        title: "商品頁面",
+        problem:
+          "商品頁可以依「產地、烘焙深淺、處理法、價格、排序」5 個條件來找豆子。篩好的結果會直接記在網址上，分享篩好的網址就能直接開啟篩好的畫面。整體視覺走暖橘 × 深炭灰、雜誌專欄感。",
+        image: "/cases/my-coffee-site/products.jpg",
+      },
+      {
+        title: "購物車：還沒登入也能先加，登入後不會清空",
+        problem:
+          "登入帳號前就能先把豆子加進購物車，瀏覽器關掉不消失。等想結帳時再登入，登入前後加入購物車的豆子會合併在一起，不會因為登入就被洗掉。下單那一刻，庫存就直接扣掉，避免兩個顧客同時搶到最後一包。每張訂單都有獨立的訂單編號（例：ORD-20260521-0001），日期 + 流水號方便對帳。",
+        image: "/cases/my-coffee-site/cart.jpg",
+      },
+      {
+        title: "配送：超商取貨或宅配到府，設定是否寄送離島",
+        problem:
+          "三種拿貨方式：到 7-11 取貨、到全家取貨、宅配到府。可以設定是否寄送離島。如果不寄送離島，系統會在送出訂單前提醒不能寄，並直接擋下。",
+        image: "/cases/my-coffee-site/shipping.jpg",
+      },
+      {
+        title: "付款：信用卡、LINE Pay、ATM 轉帳、貨到付款",
+        problem:
+          "四種付款方式都接好：信用卡（透過綠界刷卡）、LINE Pay、ATM 轉帳、貨到付款。信用卡與 LINE Pay 都走測試環境，刷下去不會真的扣錢，方便客戶端先看流程。ATM 轉帳和貨到付款由店家在後台手動標記「已收款」，刷卡和 LINE Pay 則一律要等銀行系統回覆才算成功，避免有人偽造「我付過了」的訊息卻沒真的付到錢。",
+        image: "/cases/my-coffee-site/checkout.jpg",
+      },
+      {
+        title: "會員中心：看訂單、訂閱配送、累積消費自動升級",
+        problem:
+          "顧客登入後能看到：歷史訂單、收件地址、收藏的豆款、目前訂閱的配送方案。會員等級會依累計消費自動升等——累計滿 5,000 元升 Tier 02、滿 15,000 元升 Tier 03，後續可對應到不同折扣或贈品。等級在顧客付款完成的當下就重算，不必等隔天結算，顧客馬上能在會員頁看到自己升級了。",
+        image: "/cases/my-coffee-site/account.jpg",
+      },
+    ],
+    solution: {
+      text:
+        'Next.js 16 App Router + 4 個 route group（前台 (shop) / 會員 (member) / 後台 (admin) / 結帳付款 (payment-dispatch)），server component 預設、需要 state 才加 "use client"。Auth.js v5 credentials + JWT session；用 Next 16 的 proxy.ts 取代舊 middleware.ts 集中守關 /account/* / /admin/* / /checkout/*。Prisma 7 採 adapter-pg 初始化、prisma.config.ts 取代 schema datasource url。資料庫 Supabase PostgreSQL；商品圖走 Supabase Storage public bucket。賣家後台另外含訂單狀態機、商品 / 庫存 / 優惠碼 CRUD、Recharts 營收趨勢、CSV 匯出（RFC 4180 + UTF-8 BOM）、物流建單。',
+    },
+    stack: [
+      {
+        layer: "框架",
+        tech: "Next.js 16.2.6（App Router、Turbopack）+ React 19.2.4 + TypeScript 5",
+      },
+      {
+        layer: "樣式",
+        tech: "Tailwind CSS 4（@theme in CSS，不用 tailwind.config.ts）+ Noto Serif TC / Noto Sans TC（Google Fonts CDN）",
+      },
+      {
+        layer: "資料庫 / ORM",
+        tech: "PostgreSQL（Supabase）+ Prisma 7.8 + @prisma/adapter-pg",
+      },
+      {
+        layer: "驗證",
+        tech: "Auth.js v5（next-auth@beta）+ bcryptjs + JWT session；Role enum 分 CUSTOMER / SELLER，proxy.ts 集中 role gate",
+      },
+      {
+        layer: "金流",
+        tech: "ECPay AIO sandbox（CheckMacValue SHA256 + .NET URL encode）+ LINE Pay v3（HMAC-SHA256）+ 銀行轉帳 + 貨到付款",
+      },
+      {
+        layer: "物流",
+        tech: "ECPay 物流 sandbox /Express/Create + Mock CVS 10 間 fake 店（5 間 7-11 + 5 間全家）",
+      },
+      {
+        layer: "後台",
+        tech: "Recharts 3.8 營收趨勢、Supabase Storage product-images bucket、CSV 匯出（RFC 4180 + UTF-8 BOM）",
+      },
+      { layer: "部署", tech: "Vercel + Supabase（sandbox 沿用同顆 dev DB）" },
+    ],
+    decisions: [
+      {
+        title: "proxy.ts 取代 middleware.ts（Next.js 16 慣例）",
+        body: "Next 16 把 middleware 改稱 proxy。role gate（/account 需登入、/admin 需 SELLER、/checkout 需登入）寫在 proxy.ts 集中守關；每個 page 不重複檢查。auth.config.ts 設計成 edge-safe，jwt / session / authorized callbacks 都在這層，給 proxy 與 Auth.js handler 共用。",
+      },
+      {
+        title: "4 處 PAID trigger 共用 applyPaidEffects transaction",
+        body: "後台 updateOrderStatus、後台 confirmManualPayment、ECPay return、LINE Pay confirm 共 4 個進入點都會把訂單推進 PAID。為了避免「升等漏算」「lifetimeSpent 不一致」「優惠碼重複計次」，全部呼叫 lib/order-paid-effects.ts 的 applyPaidEffects(tx, ...)，在同一個 transaction 裡寫 PromoCodeUsage + 更新 user.lifetimeSpent + 重算 tier。",
+      },
+      {
+        title: "CVS 選店走 Mock 10 間 fake 店，不接真 StoreMap",
+        body: "綠界 StoreMap 是跨網域跳轉 + 回 callback 帶 query 回來，要設定 ReplyURL、dev 還要 tunnel。權衡後決定 sandbox demo 階段先用 Mock 10 間 fake 店，placeOrder 在後端用 findStoreById 驗 storeId + chain 對齊，未來要接真 StoreMap 只換 fetch 來源即可。",
+      },
+      {
+        title: "callback redirect 用 cfg.appUrl base 避開 dev tunnel host header 改寫",
+        body: "ECPay / LINE Pay callback 回 redirect 時，若用 request 的 host 組 URL，dev 環境跑 cloudflared / ngrok 會把 host 改成 tunnel domain，使用者被打回 tunnel 而不是本機。改用 env 設定的 cfg.appUrl 當 base，dev tunnel 或 prod Vercel 都能正確跳回。",
+      },
     ],
   },
   {
