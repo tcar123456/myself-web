@@ -33,6 +33,16 @@ const cases: CaseItem[] = [
     thumbnail: "/cases/my-coffee-site/cover.jpg",
   },
   {
+    slug: "condo-management",
+    name: "社區物業收費管理系統",
+    tagline:
+      "給物業公司管多個社區、約 1000 戶的收費系統：算應收、用點陣印表機印三聯單、收款銷帳一條龍，並把自動備份做成最重要的功能，讓資料不再憑空消失。",
+    stack: "C# · .NET WinForms · SQLite · 點陣印表機 ESC/P",
+    type: "真實接案 · 桌面收費系統",
+    featured: true,
+    thumbnail: "/cases/condo-management/cover.jpg",
+  },
+  {
     slug: "voxplan",
     name: "VoxPlan 語音行事曆",
     tagline:
