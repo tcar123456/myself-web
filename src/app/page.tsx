@@ -69,16 +69,16 @@ export default function Home() {
       <section className="grid grid-cols-1 gap-10 md:grid-cols-[1fr_220px] md:items-center md:gap-16">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            Portfolio
+            AI 應用整合工程師 · 獨立接案
           </p>
           <h1 className="mt-5 text-4xl font-semibold leading-[1.2] tracking-tight md:text-5xl md:leading-[1.15]">
-            用程式碼
+            讓 AI 真的
             <br className="hidden md:block" />
-            讓世界更便利
+            幫你的生意做事
           </h1>
           <p className="mt-6 max-w-xl text-lg text-zinc-600 md:text-xl dark:text-zinc-400">
-            我是 Alvin ，是一名獨立工程師，善於 LINE 生態系、網頁製作與 AI 應用，致力於替每位客戶客製化最適合的產品。<br />
-            從接小型店家的預約系統到自己上架語音行事曆 APP，前端、後端到部署都是由自己開發、上架。
+            我是 Alvin，AI 應用整合工程師。利用現成、成熟的大型語言模型（Claude、GPT、Gemini）串接、組裝成能解決你實際業務問題、而且能穩定上線運作的系統。<br />
+            從 LINE 生態系、全端網站到 AI 自動化，需求釐清、開發到部署上線。
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-zinc-500">
             <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" aria-hidden />
@@ -169,13 +169,20 @@ export default function Home() {
         </h2>
         <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
           <p className="text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-            從 LINE 一條龍系統開始接案，後來也自己做了一款語音行事曆 APP 上架。
-            主要做 LINE 生態系、AI 應用、中小型全端網站這三塊；從需求釐清、寫 code 到部署上線。
+            這一年我把重心轉到 AI 應用整合：把成熟的大型語言模型串成能解決真實問題的工具——讓 AI 讀懂你自己的資料、幫你跑完多步驟的流程、接上你現有的系統與資料庫。底層需要的 API 串接、後端邏輯、資料庫與部署維運，正是我原本就在做的全端工作，AI 是往上疊、不是砍掉重練。
             <br />
             <br />
-            如果你正在找一個能從零做到上線、過程中持續溝通的工程師，歡迎來信或私訊 LINE 官方帳號聊聊喔。
+            如果你有一個「這件事能不能用 AI 幫我省下來」的想法，歡迎來信或私訊 LINE 官方帳號聊聊。
           </p>
           <ul className="space-y-5 text-zinc-700 dark:text-zinc-300">
+            <li>
+              <p className="font-semibold text-zinc-900 dark:text-zinc-50">
+                AI 應用整合
+              </p>
+              <p className="mt-1 text-sm text-zinc-500">
+                LLM API · RAG 檢索增強 · Agent 自主任務 · MCP 工具協議 · 部署與成本控管
+              </p>
+            </li>
             <li>
               <p className="font-semibold text-zinc-900 dark:text-zinc-50">
                 LINE 生態系一條龍
@@ -186,18 +193,10 @@ export default function Home() {
             </li>
             <li>
               <p className="font-semibold text-zinc-900 dark:text-zinc-50">
-                AI 應用整合
-              </p>
-              <p className="mt-1 text-sm text-zinc-500">
-                Whisper · GPT-4o-mini · Prompt Engineering · NLP Pipeline
-              </p>
-            </li>
-            <li>
-              <p className="font-semibold text-zinc-900 dark:text-zinc-50">
                 全端網站與 SaaS
               </p>
               <p className="mt-1 text-sm text-zinc-500">
-                Next.js · Flutter · Firebase · Cloudflare · Zeabur · GAS · Supabase
+                Next.js · Flutter · Firebase · Supabase · Cloudflare · Zeabur
               </p>
             </li>
           </ul>
