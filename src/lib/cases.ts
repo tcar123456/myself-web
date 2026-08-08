@@ -21,6 +21,8 @@ export type Feature = {
   description?: string;
   image?: string;
   images?: string[];
+  /** 截圖條卡片的 CSS aspect-ratio，預設 "9 / 19"（手機全螢幕截圖） */
+  imagesAspect?: string;
 };
 
 export type Case = {
@@ -92,7 +94,14 @@ export const cases: Case[] = [
           "第一版的資料放在 Google Sheets，店家想查什麼得自己開試算表捲。第二版把整套重寫成有完整後台的系統，左邊選單從儀表板、行事曆、預約管理、客戶、員工與班表、服務項目到統計報表，開店老闆自己就能操作：預約管理挑日期區間跟狀態，一頁看完誰、幾點、做什麼、收多少；行事曆有月／週／日三種檢視，每位美甲師一個顏色，誰今天滿檔一眼就知道；統計報表自動算出本月營收、完成幾筆、回頭客佔比、平均客單價，再加上近半年營收趨勢、哪些服務最多人做、每位美甲師各做了多少業績——不用再自己開 Excel 加總。",
         description:
           "截圖依序為側邊選單、預約管理、行事曆、統計報表（上半、下半），取自體驗環境；畫面中的營收與預約數字是每日重置的示範資料，不是真實營運數據。",
-        image: "/cases/nail-art-reservation/admin-suite.jpg",
+        images: [
+          "/cases/nail-art-reservation/admin-1.jpg",
+          "/cases/nail-art-reservation/admin-2.jpg",
+          "/cases/nail-art-reservation/admin-3.jpg",
+          "/cases/nail-art-reservation/admin-4.jpg",
+          "/cases/nail-art-reservation/admin-5.jpg",
+        ],
+        imagesAspect: "9 / 16",
       },
     ],
     solution: {

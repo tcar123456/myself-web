@@ -148,18 +148,19 @@ export default async function WorkDetail({
                 (() => {
                   const galleryItems = f.images.map((src, k) => ({
                     src,
-                    alt: `${f.title} - 步驟 ${k + 1}`,
+                    alt: `${f.title} - ${k + 1}`,
                   }));
                   return (
                     <div className="-mx-6 flex gap-3 overflow-x-auto px-6 pb-2 sm:mx-0 sm:gap-4 sm:px-0">
                       {f.images.map((img, j) => (
                         <div
                           key={j}
-                          className="relative aspect-[9/19] w-[180px] flex-shrink-0 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 sm:w-[200px]"
+                          style={{ aspectRatio: f.imagesAspect ?? "9 / 19" }}
+                          className="relative w-[180px] flex-shrink-0 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 sm:w-[200px]"
                         >
                           <ZoomableImage
                             src={img}
-                            alt={`${f.title} - 步驟 ${j + 1}`}
+                            alt={`${f.title} - ${j + 1}`}
                             fill
                             sizes="200px"
                             className="object-contain"
