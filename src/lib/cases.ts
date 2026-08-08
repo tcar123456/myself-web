@@ -3,6 +3,13 @@ export type StackItem = {
   tech: string;
 };
 
+/** 同一個案例有第二套實作時，用來與 `stack` 左右並排對照 */
+export type StackAlt = {
+  title: string;
+  note?: string;
+  items: StackItem[];
+};
+
 export type ArchitectureDecision = {
   title: string;
   body: string;
@@ -31,6 +38,9 @@ export type Case = {
     flow?: string;
   };
   stack: StackItem[];
+  /** 有 stackAlt 時，這是左欄的標題；沒有就沿用預設的「技術棧」 */
+  stackTitle?: string;
+  stackAlt?: StackAlt;
   decisions: ArchitectureDecision[];
 };
 
@@ -76,6 +86,14 @@ export const cases: Case[] = [
           "如果您是個人或者小型工作室，每月客流量不超過150人，我會建議使用 google 試算表做為後端，原因是 google 試算表是任何人也能輕易查看的後端選擇。但如果您的每月客流量超過150人，我就會建議使用 Firebase 或者 Supabase 做為後端，原因是這兩個都有更強大和更穩定的性能。",
         image: "/cases/nail-art-reservation/sheets.png",
       },
+      {
+        title: "第二版：店家自己的後台",
+        problem:
+          "第一版的資料放在 Google Sheets，店家想查什麼得自己開試算表捲。第二版把整套重寫成有完整後台的系統，左邊選單從儀表板、行事曆、預約管理、客戶、員工與班表、服務項目到統計報表，開店老闆自己就能操作：預約管理挑日期區間跟狀態，一頁看完誰、幾點、做什麼、收多少；行事曆有月／週／日三種檢視，每位美甲師一個顏色，誰今天滿檔一眼就知道；統計報表自動算出本月營收、完成幾筆、回頭客佔比、平均客單價，再加上近半年營收趨勢、哪些服務最多人做、每位美甲師各做了多少業績——不用再自己開 Excel 加總。",
+        description:
+          "截圖依序為側邊選單、預約管理、行事曆、統計報表（上半、下半），取自體驗環境；畫面中的營收與預約數字是每日重置的示範資料，不是真實營運數據。",
+        image: "/cases/nail-art-reservation/admin-suite.jpg",
+      },
     ],
     solution: {
       text: "完全留在 LINE 內的預約動線：客人加好友 → Rich Menu → LIFF 表單 → Cloudflare Worker 代理 → Google Apps Script 寫入 Sheets / Calendar → 推送確認訊息。代理層隱藏真實 GAS URL，後端用 LINE Access Token 反查驗證身份。",
@@ -98,6 +116,7 @@ export const cases: Case[] = [
   │   寄送 Email 通知店家
   └─ 點 Rich Menu「我的預約」→ LIFF 顯示預約紀錄（可取消）`,
     },
+    stackTitle: "已交付客戶（GAS + Google Sheets）",
     stack: [
       { layer: "前端（LIFF 頁）", tech: "原生 HTML / CSS / JS、LINE LIFF SDK" },
       {
@@ -115,6 +134,41 @@ export const cases: Case[] = [
         tech: "LINE Access Token 驗證、AES-256-GCM localStorage 加密、敏感資料 console 遮罩",
       },
     ],
+    stackAlt: {
+      title: "第二版 （Next.js + PostgreSQL）",
+      
+      items: [
+        { layer: "框架", tech: "Next.js 16（App Router）+ TypeScript" },
+        {
+          layer: "資料庫",
+          tech: "PostgreSQL 18 + Prisma 6（正式走 Zeabur 內網，本機用 embedded PostgreSQL）",
+        },
+        { layer: "UI", tech: "Tailwind CSS v4 + shadcn/ui" },
+        { layer: "行事曆", tech: "FullCalendar" },
+        { layer: "圖表", tech: "Recharts" },
+        {
+          layer: "後台登入",
+          tech: "Auth.js v5（LINE Login）+ 一次性邀請碼綁定",
+        },
+        { layer: "前台驗證", tech: "LIFF access token → LINE API 驗證" },
+        {
+          layer: "併發防護",
+          tech: "PostgreSQL exclusion constraint（booking_no_overlap），同員工的預約時段不可能重疊",
+        },
+        {
+          layer: "排程",
+          tech: "node-cron（每小時）+ /api/cron/reminders 外部備援",
+        },
+        {
+          layer: "測試",
+          tech: "Vitest 409 項（單元／架構守門／DB 整合／API 整合）",
+        },
+        {
+          layer: "部署",
+          tech: "Docker（output: standalone）+ Zeabur，一客一套獨立部署",
+        },
+      ],
+    },
     decisions: [
       {
         title: "代理層隱藏真實後端",

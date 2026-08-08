@@ -1,10 +1,42 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { cases, getCase, getNextCase } from "@/lib/cases";
+import { cases, getCase, getNextCase, type StackItem } from "@/lib/cases";
 import ZoomableImage from "@/components/ZoomableImage";
 
 type Params = { slug: string };
+
+/** 兩套技術棧並排時用的單欄；窄欄放不下「層｜技術」表格，改成上下堆疊的定義清單 */
+function StackColumn({
+  title,
+  note,
+  items,
+}: {
+  title: string;
+  note?: string;
+  items: StackItem[];
+}) {
+  return (
+    <div className="rounded-2xl border border-zinc-200 p-5 dark:border-zinc-800">
+      <p className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
+        {title}
+      </p>
+      {note && (
+        <p className="mt-2 text-xs leading-relaxed text-zinc-500">{note}</p>
+      )}
+      <dl className="mt-5 space-y-4">
+        {items.map((s, i) => (
+          <div key={i}>
+            <dt className="text-xs text-zinc-500">{s.layer}</dt>
+            <dd className="mt-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+              {s.tech}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
 
 export function generateStaticParams() {
   return cases.map((c) => ({ slug: c.slug }));
@@ -37,6 +69,7 @@ export default async function WorkDetail({
   const hasTechDetails =
     c.solution !== undefined ||
     c.stack.length > 0 ||
+    c.stackAlt !== undefined ||
     c.decisions.length > 0;
 
   return (
@@ -196,7 +229,25 @@ export default async function WorkDetail({
                 </div>
               )}
 
-              {c.stack.length > 0 && (
+              {c.stackAlt ? (
+                <div>
+                  <h3 className="text-base font-semibold tracking-tight">
+                    技術棧
+                  </h3>
+                  <div className="mt-4 grid gap-6 md:grid-cols-2">
+                    <StackColumn
+                      title={c.stackTitle ?? "原版"}
+                      items={c.stack}
+                    />
+                    <StackColumn
+                      title={c.stackAlt.title}
+                      note={c.stackAlt.note}
+                      items={c.stackAlt.items}
+                    />
+                  </div>
+                </div>
+              ) : (
+                c.stack.length > 0 && (
                 <div>
                   <h3 className="text-base font-semibold tracking-tight">
                     技術棧
@@ -222,6 +273,7 @@ export default async function WorkDetail({
                     </tbody>
                   </table>
                 </div>
+                )
               )}
 
               {c.decisions.length > 0 && (
