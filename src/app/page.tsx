@@ -90,11 +90,11 @@ export default function Home() {
         {/* 個人照片 */}
         <div className="relative aspect-square w-40 self-start overflow-hidden rounded-full md:w-[220px] md:self-center">
           <Image
-            src="/me-v2.png"
+            src="/me-v3.jpg"
             alt="Alvin"
             fill
             sizes="(min-width: 768px) 220px, 160px"
-            className="origin-top scale-115 object-cover"
+            className="object-cover"
             priority
           />
         </div>
