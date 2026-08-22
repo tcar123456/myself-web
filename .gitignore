@@ -17,6 +17,7 @@ out/
 .turbo/
 .cache/
 .parcel-cache/
+*.tsbuildinfo
 
 # Environment variables
 .env
