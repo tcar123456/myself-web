@@ -105,6 +105,21 @@ export default async function WorkDetail({
               {c.duration}
             </dd>
           </div>
+          {c.demoUrl && (
+            <div>
+              <dt className="text-zinc-500">試玩</dt>
+              <dd className="mt-1">
+                <a
+                  href={c.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-900 underline underline-offset-4 dark:text-zinc-50"
+                >
+                  {c.demoLabel ?? new URL(c.demoUrl).hostname} ↗
+                </a>
+              </dd>
+            </div>
+          )}
           {c.websiteUrl && (
             <div>
               <dt className="text-zinc-500">官網</dt>

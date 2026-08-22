@@ -33,6 +33,10 @@ export type Case = {
   role: string;
   duration: string;
   websiteUrl?: string;
+  /** 可公開試玩的體驗連結（LINE 官方帳號、Demo 站等） */
+  demoUrl?: string;
+  /** 試玩連結顯示的文字，省略時顯示網域 */
+  demoLabel?: string;
   problem?: string;
   features: Feature[];
   solution?: {
@@ -54,7 +58,9 @@ export const cases: Case[] = [
     outcome:
       "建置 LINE 官方帳號 + 預約網頁，讓客人在 LINE 裡完成所有預約流程的美甲店預約系統——從加好友、選服務、到收提醒，全程不用切換 App。",
     role: "獨立完成（前端、後端、部署、LINE 平台設定）",
-    duration: "上線中 試玩: https://lin.ee/vgqYdpW ",
+    duration: "上線中",
+    demoUrl: "https://lin.ee/vgqYdpW",
+    demoLabel: "加 LINE 試玩",
     problem:
       "店家原本以「人工 LINE 對話 + Excel 手動記錄」管理預約：高峰時段訊息來不及回，客人流失；預約時段重複、漏記；客戶資料散落在 LINE 對話裡，回頭查詢費時。",
     features: [
