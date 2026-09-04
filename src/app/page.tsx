@@ -49,16 +49,18 @@ const cases: CaseItem[] = [
       "用講的就能建立行程。「明天下午兩點在咖啡廳跟 Amy 開會」自動拆成標題、時間、地點、人員。",
     stack: "Flutter · Firebase · FastAPI · Whisper / GPT-4o-mini",
     type: "個人 SaaS · iOS / Android ",
+    featured: true,
     thumbnail: "/cases/voxplan/cover.jpg",
   },
   {
-    slug: "freedunk-hub",
-    name: "Freedunk Hub",
+    slug: "gamecoins",
+    name: "GameCoins 自動盯盤與成本分析系統",
     tagline:
-      "為《Freedunk》玩家做的戰術分析工具——拖曳球員、Canvas 畫戰術線、一步步推演。",
-    stack: "React · Canvas 2D API · 純前端單檔",
-    type: "",
-    thumbnail: "/cases/freedunk-hub/cover.jpg",
+      "我自己做遊戲幣買賣的營運工具：每 5 秒自動看一次對岸平台的價格，便宜的貨一出現就通知手機，並直接算出這一單賺不賺。再把累積下來的紀錄排成「哪一天的哪個時段最划算」，用資料回答憑感覺答不出來的問題。",
+    stack: "Python（零第三方依賴） · 資料抓取 · 統計分析 · Telegram Bot · LINE 官方帳號",
+    type: "自有事業營運工具 · 已上線運作中",
+    featured: true,
+    thumbnail: "/cases/gamecoins/cover.jpg",
   },
 ];
 
