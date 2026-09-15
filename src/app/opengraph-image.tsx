@@ -39,7 +39,9 @@ async function loadGoogleFont(family: string, text: string, weight: number) {
 }
 
 export default async function OpengraphImage() {
-  const headline = "用程式碼讓世界更便利";
+  // 11 個字排一行會把最後一個字擠到第二行，照詞意斷成兩行
+  const headlineLines = ["系統自動化", "讓工作更輕鬆"];
+  const headline = headlineLines.join("");
   const sub = "Alvin · 獨立工程師 · LINE 生態系 / AI 應用 / 全端網站";
   const eyebrow = "PORTFOLIO · 目前接案中";
   const allText = headline + sub + eyebrow;
@@ -55,7 +57,7 @@ export default async function OpengraphImage() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#fafafa",
+          background: "#ffffff",
           padding: "80px 88px",
           display: "flex",
           flexDirection: "column",
@@ -68,13 +70,13 @@ export default async function OpengraphImage() {
               width: 12,
               height: 12,
               borderRadius: 999,
-              background: "#10b981",
+              background: "#0b3b2e",
             }}
           />
           <div
             style={{
               fontSize: 22,
-              color: "#71717a",
+              color: "#5a6159",
               letterSpacing: "0.2em",
               fontWeight: 400,
             }}
@@ -86,19 +88,23 @@ export default async function OpengraphImage() {
         <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
           <div
             style={{
-              fontSize: 104,
+              display: "flex",
+              flexDirection: "column",
+              fontSize: 112,
               fontWeight: 600,
-              color: "#18181b",
+              color: "#10130f",
               lineHeight: 1.12,
               letterSpacing: "-0.03em",
             }}
           >
-            {headline}
+            {headlineLines.map((line) => (
+              <div key={line}>{line}</div>
+            ))}
           </div>
           <div
             style={{
               fontSize: 30,
-              color: "#52525b",
+              color: "#33392f",
               lineHeight: 1.4,
               fontWeight: 400,
             }}

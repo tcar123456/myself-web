@@ -1,26 +1,134 @@
 @import "tailwindcss";
 
+/*
+  關燈由 <html data-theme="dark"> 觸發，預設（沒有屬性）一律是開燈。
+  刻意不跟 prefers-color-scheme —— 客戶看到的第一眼由我們決定，不是由他手機的設定決定。
+  這讓 dark: 變體只需要一條選擇器。
+*/
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── 開燈 ── */
+  --ground: #ffffff;
+  --paper: #f2f1ec;
+  --ink: #10130f;
+  /* 詳情頁的內文，介於標題與註解之間 */
+  --body: #33392f;
+  --soft: #5a6159;
+  --rule: rgba(11, 59, 46, 0.16);
+  --accent: #0b3b2e;
+  --tint: #e8efe9;
+
+  /* CTA 色塊：全頁最強的一塊，開關燈都要維持這個角色 */
+  --cta-bg: #0b3b2e;
+  --cta-ink: #ffffff;
+  --cta-soft: rgba(244, 247, 244, 0.78);
+  --btn-bg: #ffffff;
+  --btn-ink: #0b3b2e;
+  --btn-ghost-ink: #ffffff;
+  --btn-ghost-line: rgba(255, 255, 255, 0.5);
+
+  /* 浮動聯絡出口的 Email 那顆（LINE 那顆固定用品牌綠，不吃主題） */
+  --rail-bg: #0b3b2e;
+  --rail-ink: #ffffff;
+
+  /* 關燈時粗襯線會糊，降一個字重；白底截圖會刺眼，降一點亮度 */
+  --h1-weight: 900;
+  --shot-dim: 1;
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  /* ── 關燈 ── */
+  --ground: #0c100e;
+  --paper: #151a17;
+  --ink: #eceee9;
+  --body: #c9cfc7;
+  --soft: #97a099;
+  --rule: rgba(157, 191, 172, 0.2);
+  --accent: #9dbfac;
+  --tint: #18211c;
+
+  --cta-bg: #9dbfac;
+  --cta-ink: #08110c;
+  --cta-soft: rgba(8, 17, 12, 0.74);
+  --btn-bg: #08110c;
+  --btn-ink: #eceee9;
+  --btn-ghost-ink: #08110c;
+  --btn-ghost-line: rgba(8, 17, 12, 0.42);
+
+  /* 霧綠會跟 LINE 綠打架，Email 那顆改骨白 */
+  --rail-bg: #eceee9;
+  --rail-ink: #0c100e;
+
+  --h1-weight: 700;
+  --shot-dim: 0.92;
+
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter), var(--font-noto-sans-tc), system-ui, sans-serif;
+  --color-ground: var(--ground);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-soft: var(--soft);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-tint: var(--tint);
+  --color-cta: var(--cta-bg);
+  --color-cta-ink: var(--cta-ink);
+  --color-cta-soft: var(--cta-soft);
+  --color-btn: var(--btn-bg);
+  --color-btn-ink: var(--btn-ink);
+  --color-rail: var(--rail-bg);
+  --color-rail-ink: var(--rail-ink);
+
+  --font-sans: var(--font-noto-sans-tc), var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-noto-serif-tc), Georgia, "Times New Roman", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--ground);
+  color: var(--ink);
   font-family: var(--font-sans);
-  line-height: 1.7;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ground);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* 墨線這一版的骨架是直角 + 細線，截圖與人像在關燈時一起降亮度 */
+.shot-dim {
+  filter: brightness(var(--shot-dim));
+  transition: filter 0.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

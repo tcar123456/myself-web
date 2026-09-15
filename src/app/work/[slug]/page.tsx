@@ -17,18 +17,18 @@ function StackColumn({
   items: StackItem[];
 }) {
   return (
-    <div className="rounded-2xl border border-zinc-200 p-5 dark:border-zinc-800">
-      <p className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
+    <div className="border border-rule p-5">
+      <p className="text-sm font-medium text-ink">
         {title}
       </p>
       {note && (
-        <p className="mt-2 text-xs leading-relaxed text-zinc-500">{note}</p>
+        <p className="mt-2 text-xs leading-relaxed text-soft">{note}</p>
       )}
       <dl className="mt-5 space-y-4">
         {items.map((s, i) => (
           <div key={i}>
-            <dt className="text-xs text-zinc-500">{s.layer}</dt>
-            <dd className="mt-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+            <dt className="text-xs text-soft">{s.layer}</dt>
+            <dd className="mt-1 text-sm leading-relaxed text-body">
               {s.tech}
             </dd>
           </div>
@@ -75,45 +75,48 @@ export default async function WorkDetail({
   return (
     <article className="mx-auto w-full max-w-3xl px-6 py-12 md:py-20">
       <Link
-        href="/"
-        className="inline-flex items-center text-sm text-zinc-500 transition hover:text-zinc-900 dark:hover:text-zinc-50"
+        href="/work"
+        className="inline-flex min-h-11 items-center text-sm text-soft transition hover:text-accent"
       >
-        ← 回首頁
+        ← 所有作品
       </Link>
 
       {/* Hero */}
       <header className="mt-8">
-        <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+        <p className="text-xs uppercase tracking-[0.2em] text-soft">
           {c.type}
         </p>
-        <h1 className="mt-4 text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+        <h1
+          className="mt-4 font-serif text-[clamp(1.875rem,5vw,2.75rem)] leading-[1.22] tracking-[-0.02em] text-balance"
+          style={{ fontWeight: "var(--h1-weight)" }}
+        >
           {c.name}
         </h1>
-        <p className="mt-6 text-xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+        <p className="mt-6 text-xl leading-relaxed text-body">
           {c.outcome}
         </p>
-        <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-zinc-200 pt-6 text-sm sm:grid-cols-3 dark:border-zinc-800">
+        <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-rule pt-6 text-sm sm:grid-cols-3">
           <div>
-            <dt className="text-zinc-500">角色</dt>
-            <dd className="mt-1 leading-snug text-zinc-900 dark:text-zinc-50">
+            <dt className="text-soft">角色</dt>
+            <dd className="mt-1 leading-snug text-ink">
               {c.role}
             </dd>
           </div>
           <div>
-            <dt className="text-zinc-500">時程</dt>
-            <dd className="mt-1 text-zinc-900 dark:text-zinc-50">
+            <dt className="text-soft">時程</dt>
+            <dd className="mt-1 text-ink">
               {c.duration}
             </dd>
           </div>
           {c.demoUrl && (
             <div>
-              <dt className="text-zinc-500">試玩</dt>
+              <dt className="text-soft">試玩</dt>
               <dd className="mt-1">
                 <a
                   href={c.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-zinc-900 underline underline-offset-4 dark:text-zinc-50"
+                  className="text-ink underline underline-offset-4"
                 >
                   {c.demoLabel ?? new URL(c.demoUrl).hostname} ↗
                 </a>
@@ -122,13 +125,13 @@ export default async function WorkDetail({
           )}
           {c.websiteUrl && (
             <div>
-              <dt className="text-zinc-500">官網</dt>
+              <dt className="text-soft">官網</dt>
               <dd className="mt-1">
                 <a
                   href={c.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-zinc-900 underline underline-offset-4 dark:text-zinc-50"
+                  className="text-ink underline underline-offset-4"
                 >
                   {new URL(c.websiteUrl).hostname} ↗
                 </a>
@@ -141,10 +144,10 @@ export default async function WorkDetail({
       {/* 解決了什麼問題 */}
       {c.problem && (
         <section className="mt-16">
-          <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
+          <h2 className="font-serif text-[22px] font-black tracking-[-0.015em] md:text-[26px]">
             解決問題
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <p className="mt-4 text-lg leading-relaxed text-body">
             {c.problem}
           </p>
         </section>
@@ -152,7 +155,7 @@ export default async function WorkDetail({
 
       {/* 主要功能（核心區） */}
       <section className="mt-16 md:mt-20">
-        <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
+        <h2 className="font-serif text-[22px] font-black tracking-[-0.015em] md:text-[26px]">
           主要功能
         </h2>
         <div className="mt-8 space-y-16 md:space-y-20">
@@ -171,7 +174,7 @@ export default async function WorkDetail({
                         <div
                           key={j}
                           style={{ aspectRatio: f.imagesAspect ?? "9 / 19" }}
-                          className="relative w-[180px] flex-shrink-0 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 sm:w-[200px]"
+                          className="relative w-[180px] flex-shrink-0 overflow-hidden border border-rule bg-paper sm:w-[200px]"
                         >
                           <ZoomableImage
                             src={img}
@@ -188,7 +191,7 @@ export default async function WorkDetail({
                   );
                 })()
               ) : f.image ? (
-                <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
+                <div className="overflow-hidden border border-rule bg-paper">
                   <ZoomableImage
                     src={f.image}
                     alt={f.title}
@@ -198,7 +201,7 @@ export default async function WorkDetail({
                   />
                 </div>
               ) : (
-                <div className="flex aspect-video w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 text-xs text-zinc-400 dark:border-zinc-800 dark:bg-zinc-900">
+                <div className="flex aspect-video w-full flex-col items-center justify-center gap-2 overflow-hidden border border-rule bg-paper text-xs text-soft">
                   <span className="text-2xl" aria-hidden>
                     ▢
                   </span>
@@ -207,14 +210,14 @@ export default async function WorkDetail({
               )}
               {/* 文字 */}
               <div className="mt-6">
-                <h3 className="text-xl font-semibold tracking-tight md:text-2xl">
+                <h3 className="font-serif text-[22px] font-black tracking-[-0.015em] md:text-[26px]">
                   {f.title}
                 </h3>
-                <p className="mt-3 leading-relaxed text-zinc-700 dark:text-zinc-300">
+                <p className="mt-3 leading-relaxed text-body">
                   {f.problem}
                 </p>
                 {f.description && (
-                  <p className="mt-2 text-sm leading-relaxed text-zinc-500">
+                  <p className="mt-2 text-sm leading-relaxed text-soft">
                     {f.description}
                   </p>
                 )}
@@ -227,18 +230,18 @@ export default async function WorkDetail({
       {/* 技術細節 */}
       {hasTechDetails && (
         <section className="mt-20 md:mt-24">
-          <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
+          <h2 className="font-serif text-[22px] font-black tracking-[-0.015em] md:text-[26px]">
             技術細節
           </h2>
           <div className="mt-8 space-y-10">
               {c.solution && (
                 <div>
                   
-                  <p className="mt-3 leading-relaxed text-zinc-700 dark:text-zinc-300">
+                  <p className="mt-3 leading-relaxed text-body">
                     {c.solution.text}
                   </p>
                   {c.solution.flow && (
-                    <pre className="mt-5 overflow-x-auto rounded-lg bg-zinc-50 p-5 text-xs leading-relaxed text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
+                    <pre className="mt-5 overflow-x-auto bg-paper p-5 text-xs leading-relaxed text-body">
                       {c.solution.flow}
                     </pre>
                   )}
@@ -247,7 +250,7 @@ export default async function WorkDetail({
 
               {c.stackAlt ? (
                 <div>
-                  <h3 className="text-base font-semibold tracking-tight">
+                  <h3 className="font-serif text-[17px] font-bold tracking-[-0.01em]">
                     技術棧
                   </h3>
                   <div className="mt-4 grid gap-6 md:grid-cols-2">
@@ -265,23 +268,23 @@ export default async function WorkDetail({
               ) : (
                 c.stack.length > 0 && (
                 <div>
-                  <h3 className="text-base font-semibold tracking-tight">
+                  <h3 className="font-serif text-[17px] font-bold tracking-[-0.01em]">
                     技術棧
                   </h3>
                   <table className="mt-3 w-full text-sm">
                     <thead>
-                      <tr className="text-left text-zinc-500">
+                      <tr className="text-left text-soft">
                         <th className="pb-3 font-normal">層</th>
                         <th className="pb-3 font-normal">技術</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+                    <tbody className="divide-y divide-rule">
                       {c.stack.map((s, i) => (
                         <tr key={i}>
-                          <td className="py-3 pr-4 align-top font-medium text-zinc-900 dark:text-zinc-50">
+                          <td className="py-3 pr-4 align-top font-medium text-ink">
                             {s.layer}
                           </td>
-                          <td className="py-3 leading-relaxed text-zinc-700 dark:text-zinc-300">
+                          <td className="py-3 leading-relaxed text-body">
                             {s.tech}
                           </td>
                         </tr>
@@ -294,16 +297,16 @@ export default async function WorkDetail({
 
               {c.decisions.length > 0 && (
                 <div>
-                  <h3 className="text-base font-semibold tracking-tight">
+                  <h3 className="font-serif text-[17px] font-bold tracking-[-0.01em]">
                     架構決策
                   </h3>
                   <ul className="mt-4 space-y-5">
                     {c.decisions.map((d, i) => (
                       <li key={i}>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-50">
+                        <p className="font-medium text-ink">
                           {d.title}
                         </p>
-                        <p className="mt-1.5 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+                        <p className="mt-1.5 text-sm leading-relaxed text-body">
                           {d.body}
                         </p>
                       </li>
@@ -316,15 +319,15 @@ export default async function WorkDetail({
       )}
 
       {/* 下一個案例 + 回首頁 */}
-      <nav className="mt-24 grid grid-cols-1 gap-4 border-t border-zinc-200 pt-8 sm:grid-cols-2 dark:border-zinc-800">
+      <nav className="mt-24 grid grid-cols-1 gap-4 border-t border-rule pt-8 sm:grid-cols-2">
         <Link
           href={`/work/${next.slug}`}
-          className="group rounded-2xl border border-zinc-200 p-6 transition hover:border-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-50"
+          className="group border border-rule p-6 transition hover:border-accent"
         >
-          <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+          <p className="text-xs uppercase tracking-[0.18em] text-soft">
             下一個案例
           </p>
-          <p className="mt-2 text-lg font-semibold tracking-tight">
+          <p className="mt-2 font-serif text-lg font-bold tracking-tight">
             {next.name}
             <span
               className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"
@@ -336,12 +339,12 @@ export default async function WorkDetail({
         </Link>
         <Link
           href="/"
-          className="group rounded-2xl border border-zinc-200 p-6 transition hover:border-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-50"
+          className="group border border-rule p-6 transition hover:border-accent"
         >
-          <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+          <p className="text-xs uppercase tracking-[0.18em] text-soft">
             回到
           </p>
-          <p className="mt-2 text-lg font-semibold tracking-tight">
+          <p className="mt-2 font-serif text-lg font-bold tracking-tight">
             首頁
             <span
               className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"

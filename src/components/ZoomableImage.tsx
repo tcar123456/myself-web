@@ -22,6 +22,7 @@ export default function ZoomableImage({
   wrapperClassName,
   gallery,
   galleryIndex,
+  alt,
   ...imageProps
 }: Props) {
   const [open, setOpen] = useState(false);
@@ -34,28 +35,26 @@ export default function ZoomableImage({
 
   const close = useCallback(() => setOpen(false), []);
 
+  // 開啟時把索引重設回被點擊的那張、scale 歸位。
+  // 直接在事件裡一起設，不用 effect 事後補救（那樣每次開啟會多 render 一輪）
+  const openLightbox = useCallback(() => {
+    setCurrentIdx(galleryIndex ?? 0);
+    setScale(MIN_SCALE);
+    setOpen(true);
+  }, [galleryIndex]);
+
+  // 切換到不同張時 scale 一併歸位
   const goPrev = useCallback(() => {
     if (!hasGallery) return;
     setCurrentIdx((i) => (i - 1 + galleryLen) % galleryLen);
+    setScale(MIN_SCALE);
   }, [hasGallery, galleryLen]);
 
   const goNext = useCallback(() => {
     if (!hasGallery) return;
     setCurrentIdx((i) => (i + 1) % galleryLen);
+    setScale(MIN_SCALE);
   }, [hasGallery, galleryLen]);
-
-  // 開啟時把索引重設回被點擊的那張、scale 歸位
-  useEffect(() => {
-    if (open) {
-      setCurrentIdx(galleryIndex ?? 0);
-      setScale(MIN_SCALE);
-    }
-  }, [open, galleryIndex]);
-
-  // 切換到不同張時把 scale 歸位
-  useEffect(() => {
-    if (open) setScale(MIN_SCALE);
-  }, [currentIdx, open]);
 
   // 鍵盤 / 滾輪 / body scroll lock
   useEffect(() => {
@@ -95,19 +94,19 @@ export default function ZoomableImage({
 
   const currentItem: GalleryItem = hasGallery
     ? gallery![currentIdx]
-    : { src: inlineSrcStr, alt: imageProps.alt };
+    : { src: inlineSrcStr, alt };
 
   return (
     <>
       <div
         role="button"
         tabIndex={0}
-        aria-label={`放大圖片：${imageProps.alt}`}
-        onClick={() => setOpen(true)}
+        aria-label={`放大圖片：${alt}`}
+        onClick={openLightbox}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            setOpen(true);
+            openLightbox();
           }
         }}
         className={[
@@ -115,7 +114,7 @@ export default function ZoomableImage({
           wrapperClassName ?? "",
         ].join(" ")}
       >
-        <Image {...imageProps} />
+        <Image alt={alt} {...imageProps} />
       </div>
 
       {open && (

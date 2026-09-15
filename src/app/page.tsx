@@ -1,267 +1,215 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getHomeCases, cases } from "@/lib/cases";
 
-type CaseItem = {
-  slug: string;
-  name: string;
-  tagline: string;
-  stack: string;
-  type: string;
-  featured?: boolean;
-  thumbnail?: string;
-};
+const LINE_URL = "https://line.me/R/ti/p/%40989evvhq";
+const EMAIL_URL = "mailto:enghuang100@gmail.com";
 
-const cases: CaseItem[] = [
+const skills = [
   {
-    slug: "nail-art-reservation",
-    name: "LINE 一條龍預約系統",
-    tagline:
-      "建置 LINE 官方帳號 + 預約網頁，讓客人在 LINE 裡完成所有預約流程——加好友、選服務、收提醒，全程不用切換 App。",
-    stack: "LINE Bot · LIFF · Cloudflare Worker · Google Apps Script",
-    type: "",
-    featured: true,
-    thumbnail: "/cases/nail-art-reservation/cover.jpg",
+    title: "AI 應用整合",
+    detail:
+      "LLM API · RAG 檢索增強 · Agent 自主任務 · MCP 工具協議 · 部署與成本控管",
   },
   {
-    slug: "my-coffee-site",
-    name: "暮焙 MUBEI 咖啡豆電商 Demo",
-    tagline:
-      "咖啡豆網路商店 Demo。顧客端從逛單品、加購物車、結帳付款到看會員等級；店家端從接單、改狀態、調庫存、發優惠碼到印出貨單。",
-    stack: "Next.js 16 · Tailwind 4 · Prisma 7 · Supabase · Auth.js v5 · ECPay / LINE Pay",
-    type: "個人作品 · 全端電商 Demo",
-    featured: true,
-    thumbnail: "/cases/my-coffee-site/cover.jpg",
+    title: "LINE 生態系一條龍",
+    detail: "官方帳號設定 · Bot / Webhook · LIFF · Rich Menu · 後端整合",
   },
   {
-    slug: "condo-management",
-    name: "社區物業收費管理系統",
-    tagline:
-      "給物業公司管多個社區、約 1000 戶的收費系統：算應收、用點陣印表機印三聯單、收款銷帳一條龍，並把自動備份做成最重要的功能，讓資料不再憑空消失。",
-    stack: "C# · .NET WinForms · SQLite · 點陣印表機 ESC/P",
-    type: "真實接案 · 桌面收費系統",
-    featured: true,
-    thumbnail: "/cases/condo-management/cover.jpg",
-  },
-  {
-    slug: "voxplan",
-    name: "VoxPlan 語音行事曆",
-    tagline:
-      "用講的就能建立行程。「明天下午兩點在咖啡廳跟 Amy 開會」自動拆成標題、時間、地點、人員。",
-    stack: "Flutter · Firebase · FastAPI · Whisper / GPT-4o-mini",
-    type: "個人 SaaS · iOS / Android ",
-    featured: true,
-    thumbnail: "/cases/voxplan/cover.jpg",
-  },
-  {
-    slug: "gamecoins",
-    name: "GameCoins 自動盯盤與成本分析系統",
-    tagline:
-      "我自己做遊戲幣買賣的營運工具：每 5 秒自動看一次對岸平台的價格，便宜的貨一出現就通知手機，並直接算出這一單賺不賺。再把累積下來的紀錄排成「哪一天的哪個時段最划算」，用資料回答憑感覺答不出來的問題。",
-    stack: "Python（零第三方依賴） · 資料抓取 · 統計分析 · Telegram Bot · LINE 官方帳號",
-    type: "自有事業營運工具 · 已上線運作中",
-    featured: true,
-    thumbnail: "/cases/gamecoins/cover.jpg",
+    title: "全端網站與 SaaS",
+    detail: "Next.js · Flutter · Firebase · Supabase · Cloudflare · Zeabur",
   },
 ];
 
 export default function Home() {
+  const homeCases = getHomeCases();
+  const hasMore = cases.length > homeCases.length;
+
   return (
-    <div className="mx-auto w-full max-w-5xl px-6 py-16 md:py-24">
-      {/* Hero */}
-      <section className="grid grid-cols-1 gap-10 md:grid-cols-[1fr_220px] md:items-center md:gap-16">
-        <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-            AI 應用整合工程師 · 獨立接案
-          </p>
-          <h1 className="mt-5 text-4xl font-semibold leading-[1.2] tracking-tight md:text-5xl md:leading-[1.15]">
-            讓 AI 真的
-            <br className="hidden md:block" />
-            幫你的生意做事
-          </h1>
-          <p className="mt-6 max-w-xl text-lg text-zinc-600 md:text-xl dark:text-zinc-400">
-            我是 Alvin，AI 應用整合工程師。利用現成、成熟的大型語言模型（Claude、GPT、Gemini）串接、組裝成能解決你實際業務問題、而且能穩定上線運作的系統。<br />
-            從 LINE 生態系、全端網站到 AI 自動化，需求釐清、開發到部署上線。
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-zinc-500">
-            <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" aria-hidden />
-            <span>目前接案中</span>
-            <span aria-hidden className="text-zinc-300 dark:text-zinc-700">·</span>
-            <span>台灣・繁體中文 / English</span>
+    <div>
+      {/* ── Hero ── */}
+      <section className="mx-auto w-full max-w-[1000px] px-5 pt-12 pb-10 sm:px-8 md:px-15 md:pt-24 md:pb-18">
+        <div className="grid gap-7 md:grid-cols-[1fr_210px] md:items-end md:gap-12">
+          <div>
+            <p className="flex items-center gap-3 text-[11px] font-semibold tracking-[0.2em] text-accent uppercase">
+              Independent Engineer · Taiwan
+              <span aria-hidden className="h-px flex-1 bg-rule" />
+            </p>
+
+            <h1
+              className="mt-6 font-serif text-[clamp(2.5rem,6.2vw,5.375rem)] leading-[1.12] tracking-[-0.025em] text-balance"
+              style={{ fontWeight: "var(--h1-weight)" }}
+            >
+              {/* 兩行各 7 個字：原本「丟給會自己跑的系統」9 個字塞不進欄寬，手機上會掉一個「統」到第三行 */}
+              把重複的事丟給
+              <br />
+              <span className="text-accent">會自己跑的系統</span>
+            </h1>
+
+            <p className="mt-6 max-w-[34em] text-base leading-[1.95] text-soft md:text-lg">
+              我是 Alvin，一個人接案。做 LINE
+              官方帳號、網站，也把 AI 接進去幫店家省掉每天都要重做一次的事。需求、開發、上線，從頭到尾同一個人。
+            </p>
+
+            <p className="mt-7 flex flex-wrap items-center gap-2.5 border-t border-rule pt-4 text-[13.5px] text-soft">
+              <span aria-hidden className="size-[7px] shrink-0 rounded-full bg-accent" />
+              目前接案中　·　台灣　·　繁體中文 / English
+            </p>
           </div>
-        </div>
-        {/* 個人照片 */}
-        <div className="relative aspect-square w-40 self-start overflow-hidden rounded-full md:w-[220px] md:self-center">
-          <Image
-            src="/me-v3.jpg"
-            alt="Alvin"
-            fill
-            sizes="(min-width: 768px) 220px, 160px"
-            className="object-cover"
-            priority
-          />
+
+          <figure className="shot-dim m-0 w-40 grayscale-[0.12] md:w-full md:self-center">
+            <div className="relative aspect-[3/4] w-full">
+              <Image
+                src="/me-v3.jpg"
+                alt="Alvin"
+                fill
+                sizes="(min-width: 768px) 210px, 160px"
+                className="object-cover object-[center_22%]"
+                priority
+              />
+            </div>
+            <figcaption className="mt-2 text-[10.5px] tracking-[0.14em] text-soft uppercase">
+              Alvin
+            </figcaption>
+          </figure>
         </div>
       </section>
 
-      {/* Bento Grid: 主打作品 */}
-      <section className="mt-24 md:mt-32">
-        <div className="flex items-end justify-between gap-4">
-          <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            服務內容  
-          </h2>
-          
-        </div>
-        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
-          {cases.map((c) => (
-            <Link
+      {/* ── 案例 ── */}
+      <section className="mx-auto w-full max-w-[1000px] px-5 pt-10 sm:px-8 md:px-15 md:pt-18">
+        <p className="flex items-center gap-3 text-[11px] font-semibold tracking-[0.2em] text-accent uppercase">
+          Selected Work
+          <span aria-hidden className="h-px flex-1 bg-rule" />
+        </p>
+        <h2 className="mt-4 font-serif text-[clamp(1.75rem,4.2vw,2.875rem)] font-black leading-[1.3] tracking-[-0.02em]">
+          做過的東西
+        </h2>
+
+        <div className="mt-7 md:mt-11">
+          {homeCases.map((c, i) => (
+            <article
               key={c.slug}
-              href={`/work/${c.slug}`}
-              className={[
-                "group flex flex-col justify-between overflow-hidden rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-300 md:p-8",
-                "hover:-translate-y-0.5 hover:border-zinc-900 hover:shadow-lg",
-                "dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-50",
-                c.featured ? "md:col-span-2" : "",
-              ].join(" ")}
+              className="grid gap-5 border-t border-rule py-9 md:grid-cols-[1.25fr_1fr] md:items-center md:gap-11 md:py-14"
             >
-              {/* 案例縮圖 */}
-              <div className="relative mb-6 aspect-[16/9] w-full overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-900">
-                {c.thumbnail ? (
-                  <Image
-                    src={c.thumbnail}
-                    alt={c.name}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    className="object-cover"
-                  />
-                ) : (
-                  <div
-                    className="flex h-full w-full items-center justify-center text-xs text-zinc-400"
-                    aria-hidden
-                  >
-                    {c.name} 縮圖占位
-                  </div>
-                )}
+              <div className={i % 2 === 1 ? "md:order-2" : undefined}>
+                <div className="relative aspect-video w-full border border-rule bg-paper">
+                  {c.thumbnail ? (
+                    <Image
+                      src={c.thumbnail}
+                      alt={c.name}
+                      fill
+                      sizes="(min-width: 768px) 560px, 100vw"
+                      className="shot-dim object-cover"
+                    />
+                  ) : (
+                    <span className="absolute inset-0 flex items-center justify-center text-xs text-soft">
+                      {c.name} 縮圖待補
+                    </span>
+                  )}
+                </div>
               </div>
+
               <div>
-                <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
-                  {c.type}
+                <p className="text-[10.5px] font-semibold tracking-[0.18em] text-accent uppercase">
+                  {c.label}
                 </p>
-                <h3 className="mt-2 text-xl font-semibold tracking-tight md:text-2xl">
+                <h3
+                  className="mt-3 font-serif text-[clamp(1.375rem,2.8vw,2rem)] font-bold leading-[1.38] tracking-[-0.01em]"
+                >
                   {c.name}
-                  <span
-                    className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"
-                    aria-hidden
-                  >
-                    →
-                  </span>
                 </h3>
-                <p className="mt-3 leading-relaxed text-zinc-600 dark:text-zinc-400">
+                <p className="mt-3.5 text-[15.5px] leading-[1.95] text-soft">
                   {c.tagline}
                 </p>
-                <p className="mt-3 text-sm text-zinc-500">{c.stack}</p>
+                <Link
+                  href={`/work/${c.slug}`}
+                  className="mt-5 inline-flex min-h-11 items-center gap-2 border-b border-accent pb-0.5 text-sm font-medium text-ink transition-colors hover:text-accent"
+                >
+                  看這個案子 <span aria-hidden>→</span>
+                </Link>
               </div>
-            </Link>
+            </article>
           ))}
         </div>
+
+        {hasMore && (
+          <div className="border-t border-rule pt-8">
+            <Link
+              href="/work"
+              className="inline-flex min-h-11 items-center gap-2 border-b border-accent pb-0.5 text-[15px] font-medium text-ink transition-colors hover:text-accent"
+            >
+              看全部 {cases.length} 個作品 <span aria-hidden>→</span>
+            </Link>
+          </div>
+        )}
       </section>
 
-      {/* About */}
-      <section className="mt-24 md:mt-32">
-        <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-          關於我
-        </h2>
-        <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
-          <p className="text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-            這一年我把重心轉到 AI 應用整合：把成熟的大型語言模型串成能解決真實問題的工具——讓 AI 讀懂你自己的資料、幫你跑完多步驟的流程、接上你現有的系統與資料庫。底層需要的 API 串接、後端邏輯、資料庫與部署維運，正是我原本就在做的全端工作，AI 是往上疊、不是砍掉重練。
-            <br />
-            <br />
-            如果你有一個「這件事能不能用 AI 幫我省下來」的想法，歡迎來信或私訊 LINE 官方帳號聊聊。
-          </p>
-          <ul className="space-y-5 text-zinc-700 dark:text-zinc-300">
-            <li>
-              <p className="font-semibold text-zinc-900 dark:text-zinc-50">
-                AI 應用整合
+      {/* ── 關於 ── */}
+      <section
+        id="about"
+        className="mt-11 bg-paper py-11 transition-colors duration-400 md:mt-19 md:py-19"
+      >
+        <div className="mx-auto w-full max-w-[1000px] px-5 sm:px-8 md:px-15">
+          <div className="grid gap-6 md:grid-cols-[1.15fr_1fr] md:gap-14">
+            <div>
+              <p className="flex items-center gap-3 text-[11px] font-semibold tracking-[0.2em] text-accent uppercase">
+                About
+                <span aria-hidden className="h-px flex-1 bg-rule" />
               </p>
-              <p className="mt-1 text-sm text-zinc-500">
-                LLM API · RAG 檢索增強 · Agent 自主任務 · MCP 工具協議 · 部署與成本控管
+              <h2 className="mt-4 font-serif text-[clamp(1.75rem,4.2vw,2.875rem)] font-black leading-[1.3] tracking-[-0.02em]">
+                關於我
+              </h2>
+              <p className="mt-5 max-w-[36em] text-base leading-[2.05]">
+                這一年重心放在把 AI
+                接進真的在跑的系統裡：讓它讀得懂你自己的資料、跑完多步驟的流程、接上你現有的資料庫。底下需要的
+                API、後端、資料庫、部署，本來就是我在做的事，AI 是疊上去，不是砍掉重來。
               </p>
-            </li>
-            <li>
-              <p className="font-semibold text-zinc-900 dark:text-zinc-50">
-                LINE 生態系一條龍
+              <p className="mt-5 max-w-[36em] text-base leading-[2.05]">
+                如果你手上有一件「這個能不能讓電腦自己做」的事，寫信或加 LINE 跟我說。
               </p>
-              <p className="mt-1 text-sm text-zinc-500">
-                官方帳號設定 · Bot / Webhook · LIFF · Rich Menu · 後端整合
-              </p>
-            </li>
-            <li>
-              <p className="font-semibold text-zinc-900 dark:text-zinc-50">
-                全端網站與 SaaS
-              </p>
-              <p className="mt-1 text-sm text-zinc-500">
-                Next.js · Flutter · Firebase · Supabase · Cloudflare · Zeabur
-              </p>
-            </li>
-          </ul>
+            </div>
+
+            <ul className="grid gap-5">
+              {skills.map((s) => (
+                <li key={s.title} className="border-l-2 border-accent pl-4.5">
+                  <b className="block text-base font-bold">{s.title}</b>
+                  <span className="mt-1 block text-[13.5px] leading-[1.8] text-soft">
+                    {s.detail}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="mt-24 md:mt-32">
-        <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-8 md:p-12 dark:border-zinc-800 dark:bg-zinc-900/50">
-          <h2 className="max-w-2xl text-2xl font-semibold leading-snug tracking-tight md:text-3xl">
-            聯絡 Alvin 討論你的想法，開始你專屬的專案
+      {/* ── CTA ── */}
+      <section className="bg-cta py-12 text-cta-ink transition-colors duration-400 md:py-21">
+        <div className="mx-auto w-full max-w-[1000px] px-5 sm:px-8 md:px-15">
+          <h2 className="max-w-[20em] font-serif text-[clamp(1.75rem,4.2vw,2.875rem)] font-black leading-[1.3] tracking-[-0.02em]">
+            有想法就來聊，先問能不能做
           </h2>
-          <p className="mt-4 max-w-2xl text-zinc-600 dark:text-zinc-400">
-            私訊 LINE 官方帳號或寄 Email 聊聊你的想法，評估「能不能做、預估時間、費用」，討論完成後馬上開始屬於你的專案。
+          <p className="mt-4.5 max-w-[32em] text-base leading-[1.95] text-cta-soft">
+            LINE 或 Email 都可以。先講你想解決什麼，我回你能不能做、大概要多久、多少錢。談得攏就開始。
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="https://line.me/R/ti/p/%40989evvhq"
+              href={LINE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+              className="inline-flex min-h-12 items-center bg-btn px-7 text-[15px] font-bold text-btn-ink transition-transform hover:-translate-y-0.5"
             >
-              LINE
+              加 LINE 聊聊
             </a>
             <a
-              href="mailto:enghuang100@gmail.com"
-              className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+              href={EMAIL_URL}
+              className="inline-flex min-h-12 items-center px-7 text-[15px] font-bold text-[var(--btn-ghost-ink)] shadow-[inset_0_0_0_1px_var(--btn-ghost-line)] transition-transform hover:-translate-y-0.5"
             >
-              Email
+              寄 Email
             </a>
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="mt-24 border-t border-zinc-200 pt-8 text-sm text-zinc-500 md:mt-32 dark:border-zinc-800">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 · Built with Next.js + Tailwind</p>
-          <div className="flex flex-col items-start gap-2 md:items-end">
-            <span className="text-zinc-400 dark:text-zinc-600">聯絡方式</span>
-            <p>
-              LINE ID:{" "}
-              <a
-                href="https://line.me/R/ti/p/%40989evvhq"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline-offset-4 transition hover:text-zinc-900 hover:underline dark:hover:text-zinc-50"
-              >
-                @989evvhq
-              </a>
-            </p>
-            <p>
-              Email:{" "}
-              <a
-                href="mailto:enghuang100@gmail.com"
-                className="underline-offset-4 transition hover:text-zinc-900 hover:underline dark:hover:text-zinc-50"
-              >
-                enghuang100@gmail.com
-              </a>
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

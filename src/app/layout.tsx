@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Sans_TC } from "next/font/google";
+import { Inter, Noto_Sans_TC, Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import ContactRail from "@/components/ContactRail";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,13 +18,26 @@ const notoSansTC = Noto_Sans_TC({
   preload: false,
 });
 
+const notoSerifTC = Noto_Serif_TC({
+  weight: ["700", "900"],
+  variable: "--font-noto-serif-tc",
+  display: "swap",
+  preload: false,
+});
+
 const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : "http://localhost:3000";
 
 const siteName = "Alvin · 獨立工程師作品集";
 const siteDescription =
-  "獨立工程師 Alvin 的作品集 — 專注 LINE 生態系一條龍、語音 AI 應用、全端互動工具。";
+  "一個人接案的工程師 Alvin。做 LINE 官方帳號、網站，也把 AI 接進既有流程。需求、開發、上線同一個人。";
+
+/*
+  一律開燈進站，所以只有「上次按過關燈」的回訪者需要在畫面畫出來之前補上屬性。
+  這段必須同步執行，晚一步就會閃一下白色。
+*/
+const themeScript = `try{if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -53,9 +69,17 @@ export default function RootLayout({
   return (
     <html
       lang="zh-TW"
-      className={`${inter.variable} ${notoSansTC.variable} h-full antialiased`}
+      className={`${inter.variable} ${notoSansTC.variable} ${notoSerifTC.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="flex min-h-full flex-col">
+        <SiteHeader />
+        <main className="flex-1">{children}</main>
+        <SiteFooter />
+        <ContactRail />
+      </body>
     </html>
   );
 }
