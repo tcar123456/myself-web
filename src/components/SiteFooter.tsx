@@ -1,6 +1,4 @@
-const LINE_URL = "https://line.me/R/ti/p/%40989evvhq";
-const LINE_ID = "@989evvhq";
-const EMAIL = "enghuang100@gmail.com";
+import { EMAIL, LINE_ID, LINE_URL } from "@/lib/contact";
 
 export default function SiteFooter() {
   return (

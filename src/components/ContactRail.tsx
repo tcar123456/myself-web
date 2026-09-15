@@ -2,9 +2,7 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-
-const LINE_URL = "https://line.me/R/ti/p/%40989evvhq";
-const EMAIL_URL = "mailto:enghuang100@gmail.com";
+import { EMAIL_HREF, LINE_URL } from "@/lib/contact";
 
 const circle =
   "group relative flex size-14 items-center justify-center rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.14),0_10px_24px_-10px_rgba(0,0,0,0.45)] transition-shadow hover:ring-2 hover:ring-accent";
@@ -46,7 +44,7 @@ export default function ContactRail() {
       </a>
 
       <a
-        href={EMAIL_URL}
+        href={EMAIL_HREF}
         aria-label="寄 Email 給 Alvin"
         className={`${circle} bg-rail text-rail-ink transition-[background-color,color,box-shadow] duration-400`}
       >

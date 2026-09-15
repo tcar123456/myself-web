@@ -1,9 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getHomeCases, cases } from "@/lib/cases";
-
-const LINE_URL = "https://line.me/R/ti/p/%40989evvhq";
-const EMAIL_URL = "mailto:enghuang100@gmail.com";
+import { EMAIL_HREF, LINE_URL } from "@/lib/contact";
 
 const skills = [
   {
@@ -51,9 +49,10 @@ export default function Home() {
               官方帳號、網站，也把 AI 接進去幫店家省掉每天都要重做一次的事。需求、開發、上線，從頭到尾同一個人。
             </p>
 
-            <p className="mt-7 flex flex-wrap items-center gap-2.5 border-t border-rule pt-4 text-[13.5px] text-soft">
-              <span aria-hidden className="size-[7px] shrink-0 rounded-full bg-accent" />
-              目前接案中　·　台灣　·　繁體中文 / English
+            {/* 不用 flex-wrap：窄螢幕上綠點會單獨留在一行、文字整塊掉到下一行 */}
+            <p className="mt-7 flex items-start gap-2.5 border-t border-rule pt-4 text-[13.5px] text-soft">
+              <span aria-hidden className="mt-[0.55em] size-[7px] shrink-0 rounded-full bg-accent" />
+              <span>目前接案中　·　台灣　·　繁體中文 / English</span>
             </p>
           </div>
 
@@ -202,7 +201,7 @@ export default function Home() {
               加 LINE 聊聊
             </a>
             <a
-              href={EMAIL_URL}
+              href={EMAIL_HREF}
               className="inline-flex min-h-12 items-center px-7 text-[15px] font-bold text-[var(--btn-ghost-ink)] shadow-[inset_0_0_0_1px_var(--btn-ghost-line)] transition-transform hover:-translate-y-0.5"
             >
               寄 Email
