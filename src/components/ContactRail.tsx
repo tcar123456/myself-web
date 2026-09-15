@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { EMAIL_HREF, LINE_URL } from "@/lib/contact";
+import { LINE_URL } from "@/lib/contact";
+import EmailChooser from "./EmailChooser";
 
 const circle =
   "group relative flex size-14 items-center justify-center rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.14),0_10px_24px_-10px_rgba(0,0,0,0.45)] transition-shadow hover:ring-2 hover:ring-accent";
@@ -43,9 +44,8 @@ export default function ContactRail() {
         <span className={tooltip}>加 LINE 聊聊</span>
       </a>
 
-      <a
-        href={EMAIL_HREF}
-        aria-label="寄 Email 給 Alvin"
+      <EmailChooser
+        ariaLabel="寄 Email 給 Alvin"
         className={`${circle} bg-rail text-rail-ink transition-[background-color,color,box-shadow] duration-400`}
       >
         <svg
@@ -62,7 +62,7 @@ export default function ContactRail() {
           <path d="m3.4 6.6 8.6 6 8.6-6" />
         </svg>
         <span className={tooltip}>寄 Email</span>
-      </a>
+      </EmailChooser>
     </div>
   );
 }

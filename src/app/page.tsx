@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getHomeCases, cases } from "@/lib/cases";
-import { EMAIL_HREF, LINE_URL } from "@/lib/contact";
+import { LINE_URL } from "@/lib/contact";
+import EmailChooser from "@/components/EmailChooser";
 
 const skills = [
   {
@@ -200,12 +201,9 @@ export default function Home() {
             >
               加 LINE 聊聊
             </a>
-            <a
-              href={EMAIL_HREF}
-              className="inline-flex min-h-12 items-center px-7 text-[15px] font-bold text-[var(--btn-ghost-ink)] shadow-[inset_0_0_0_1px_var(--btn-ghost-line)] transition-transform hover:-translate-y-0.5"
-            >
+            <EmailChooser className="inline-flex min-h-12 items-center px-7 text-[15px] font-bold text-[var(--btn-ghost-ink)] shadow-[inset_0_0_0_1px_var(--btn-ghost-line)] transition-transform hover:-translate-y-0.5">
               寄 Email
-            </a>
+            </EmailChooser>
           </div>
         </div>
       </section>

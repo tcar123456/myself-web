@@ -33,3 +33,12 @@ const EMAIL_BODY = [
 export const EMAIL_HREF = `mailto:${EMAIL}?subject=${encodeURIComponent(
   EMAIL_SUBJECT
 )}&body=${encodeURIComponent(EMAIL_BODY)}`;
+
+/**
+ * 網頁版 Gmail 的寫信畫面，收件人、主旨、內文一起帶入。
+ * 寄信連結要靠電腦有設定信件軟體才會動；很多 Windows 電腦沒設定，點了只會開一個空白瀏覽器視窗，
+ * 這條路只要瀏覽器有登入 Gmail 就能寄。
+ */
+export const GMAIL_COMPOSE_HREF = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${encodeURIComponent(
+  EMAIL_SUBJECT
+)}&body=${encodeURIComponent(EMAIL_BODY)}`;
